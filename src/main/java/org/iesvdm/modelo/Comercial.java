@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@SuppressWarnings("unused")
 public class Comercial {
-
+	
 	private int id;
 	private String nombre;
 	private String apellido1;
