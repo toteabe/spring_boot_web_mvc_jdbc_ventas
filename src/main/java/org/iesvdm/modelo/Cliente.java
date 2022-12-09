@@ -8,10 +8,9 @@ import lombok.Data;
 @Data
 //Para generar un constructor con lombok con todos los args
 @AllArgsConstructor
-@SuppressWarnings("unused")
 public class Cliente {
 	
-	private int id;
+	private long id;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;

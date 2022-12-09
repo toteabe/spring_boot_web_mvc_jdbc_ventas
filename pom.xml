@@ -52,7 +52,8 @@
 			<!-- dependencia para utilizar acceso a base de datos 
 			con estilo de sql directo sobre jdbc (JdbcTemplate) -->
 			<!-- Excluimos el Connection Pool de jdbc de tomcat, 
-			para usar el Hikari Connection Pool más veloz -->
+			para usar el Hikari Connection Pool más veloz 
+			https://github.com/brettwooldridge/HikariCP-->
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.tomcat</groupId>
@@ -67,7 +68,8 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>5.0.1</version>
-			<!-- hay que aceptar el warning para compatibilidad con java11+-->
+			<!-- hay que aceptar el warning para compatibilidad con java11+
+			https://github.com/brettwooldridge/HikariCP-->
 		</dependency>
 
 		<dependency>

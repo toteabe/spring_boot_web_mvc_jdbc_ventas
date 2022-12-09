@@ -37,15 +37,6 @@ public class ClienteDAOImpl implements ClienteDAO {
 						   """;
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		//Sin recuperación de id generado
-//		int rows = jdbcTemplate.update(sqlInsert,
-//							cliente.getNombre(),
-//							cliente.getApellido1(),
-//							cliente.getApellido2(),
-//							cliente.getCiudad(),
-//							cliente.getCategoria()
-//					);
-		
 		//Con recuperación de id generado
 		int rows = jdbcTemplate.update(connection -> {
 			PreparedStatement ps = connection.prepareStatement(sqlInsert, new String[] { "id" });
@@ -59,6 +50,15 @@ public class ClienteDAOImpl implements ClienteDAO {
 		},keyHolder);
 		
 		cliente.setId(keyHolder.getKey().intValue());
+		
+		//Sin recuperación de id generado
+//		int rows = jdbcTemplate.update(sqlInsert,
+//							cliente.getNombre(),
+//							cliente.getApellido1(),
+//							cliente.getApellido2(),
+//							cliente.getCiudad(),
+//							cliente.getCategoria()
+//					);
 
 		log.info("Insertados {} registros.", rows);
 	}
@@ -139,7 +139,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 	 * Borra Cliente con ID proporcionado.
 	 */
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		
 		int rows = jdbcTemplate.update("DELETE FROM cliente WHERE id = ?", id);
 		
