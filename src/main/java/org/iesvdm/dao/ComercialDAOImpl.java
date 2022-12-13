@@ -27,7 +27,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 	public synchronized void create(Comercial comercial) {
 		
 		String sqlInsert = """
-							INSERT INTO comercial (nombre, apellido1, apellido2, comision) 
+							INSERT INTO comercial (nombre, apellido1, apellido2, comisión) 
 							VALUES  (     ?,         ?,         ?,       ?)
 						   """;
 		
@@ -47,7 +47,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 			ps.setString(idx++, comercial.getNombre());
 			ps.setString(idx++, comercial.getApellido1());
 			ps.setString(idx++, comercial.getApellido2());
-			ps.setFloat(idx++, comercial.getComision());
+			ps.setFloat(idx, comercial.getComision());
 			return ps;
 		},keyHolder);
 		
@@ -63,7 +63,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 	public List<Comercial> getAll() {
 		
 		List<Comercial> listCom = jdbcTemplate.query(
-                "SELECT * FROM cliente",
+                "SELECT * FROM comercial",
                 (rs, rowNum) -> new Comercial(rs.getInt("id"),
                 						 	rs.getString("nombre"),
                 						 	rs.getString("apellido1"),
@@ -117,7 +117,8 @@ public class ComercialDAOImpl implements ComercialDAO {
 										""", comercial.getNombre()
 										, comercial.getApellido1()
 										, comercial.getApellido2()
-										, comercial.getComision());
+										, comercial.getComision()
+										, comercial.getId());
 		
 		log.info("Update de Comercial con {} registros actualizados.", rows);
     
