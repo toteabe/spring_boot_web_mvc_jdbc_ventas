@@ -120,7 +120,7 @@ public class SpringBootWebMvcJdbcVentasApplication implements CommandLineRunner{
 		comercialDAO.getAll().forEach(c -> log.info("Comercial: {}", c));
 		
 		log.info("************************************");
-		log.info("*FIN: Prueba de arranque ClienteDAO*");
+		log.info("*FIN: Prueba de arranque ComercialDAO*");
 		log.info("************************************");
 		
 	}

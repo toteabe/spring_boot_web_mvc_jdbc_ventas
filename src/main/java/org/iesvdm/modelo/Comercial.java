@@ -8,6 +8,10 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class Comercial {
 	
+	public Comercial() {
+		
+	}
+	
 	private int id;
 	private String nombre;
 	private String apellido1;
