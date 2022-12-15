@@ -11,6 +11,7 @@
 }
 
 </style>
+<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <body>
@@ -70,13 +71,13 @@
 			<div style="float: left;width: 14%" th:text="${cliente.categoria}">categoría</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form th:action="@{/clientes/__${cliente.id}__}" style="display: inline;">
-    				<input type="submit" value="Ver Detalle" />
+    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 				<form th:action="@{/clientes/editar/}+${cliente.id} " style="display: inline;">
-    				<input type="submit" value="Editar" />
+    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
 				</form>
-				<form th:action="@{/clientes/borrar/__${cliente.}_id_}" method="post" style="display: inline;">					
-    				<input type="submit" value="Eliminar" />
+				<form th:action="@{/clientes/borrar/}+${cliente.id}" method="post" style="display: inline;">					
+    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
 				</form>
 			</div>
 		</div>

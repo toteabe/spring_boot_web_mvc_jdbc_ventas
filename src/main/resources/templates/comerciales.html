@@ -11,6 +11,7 @@
 }
 
 </style>
+<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <body>
@@ -24,7 +25,7 @@
 				
 				<div style="position: absolute; left: 39%; top : 39%;">
 					
-						<form action="comerciales">
+						<form action="comerciales/crear">
 							<input type="submit" value="Crear">
 						</form>
 					</div>
@@ -67,14 +68,13 @@
 			<div style="float: left;width: 14%" th:text="${comercial.comision}">comision</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form th:action="@{/comerciales/__${comercial.id}__}" style="display: inline;">
-    				<input type="submit" value="Ver Detalle" />
+    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 				<form th:action="@{/comerciales/editar/}+${comercial.id} " style="display: inline;">
-    				<input type="submit" value="Editar" />
+    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
 				</form>
-				<form th:action="@{/comerciales/borrar/__${comercial.}_id_}" method="post" style="display: inline;">					
-    				<input type="submit" value="Eliminar" />
-				</form>
+				<form th:action="@{/comerciales/borrar/}+${comercial.id}" method="post" style="display: inline;">					
+    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
 			</div>
 		</div>
 	</div>
