@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.dao.ComercialDAO;
+import org.iesvdm.dao.PedidoDAO;
+import org.iesvdm.dao.PedidoDAOImpl;
+import org.iesvdm.dto.ComercialDTO;
+import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.modelo.Comercial;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +15,15 @@ import org.springframework.stereotype.Service;
 public class ComercialService {
 	
 	private ComercialDAO comercialDAO;
+	private PedidoDAO pedidoDAO;
 	
 	public ComercialService(ComercialDAO comercialDAO) {
 		this.comercialDAO = comercialDAO;
+	}
+	
+	public ComercialService(ComercialDAO comercialDAO, PedidoDAO pedidoDAO) {
+		this.comercialDAO = comercialDAO;
+		this.pedidoDAO = pedidoDAO;
 	}
 	
 	public List<Comercial> listAll() {
@@ -29,6 +39,20 @@ public class ComercialService {
 		else 
 			return null;
 	}
+	
+	/*public ComercialDTO oneDTO(Integer id) {
+		Optional<Comercial> optCom = comercialDAO.find(id);
+		if (optCom.isPresent()) {
+			Comercial c = optCom.get();
+			ComercialDTO comercialDTO = new ComercialDTO(c);
+			pedidoDAO = new PedidoDAO();
+			comercialDTO.setListaPedidosDTO(pedidoDAO.getAllDTO(comercialDTO.getId()));
+			return comercialDTO;
+		}
+			
+		else 
+			return null;
+	}*/
 	
 	public void newComercial(Comercial comercial) {
 		
@@ -47,6 +71,7 @@ public class ComercialService {
 		comercialDAO.delete(id);
 		
 	}
+	
 	
 	
 
