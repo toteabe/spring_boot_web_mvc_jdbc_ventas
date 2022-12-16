@@ -2,6 +2,7 @@ package org.iesvdm.controlador;
 
 import java.util.List;
 
+import org.iesvdm.dto.ComercialDTO;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ComercialService;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class ComercialController {
 	public String detalle(Model model, @PathVariable Integer id ) {
 		
 		Comercial comercial = comercialService.one(id);
+		//ComercialDTO comercial = comercialService.oneDTO(id);
 		model.addAttribute("comercial", comercial);
 		
 		return "detalle-comercial";

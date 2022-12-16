@@ -15,15 +15,9 @@ import org.springframework.stereotype.Service;
 public class ComercialService {
 	
 	private ComercialDAO comercialDAO;
-	private PedidoDAO pedidoDAO;
 	
 	public ComercialService(ComercialDAO comercialDAO) {
 		this.comercialDAO = comercialDAO;
-	}
-	
-	public ComercialService(ComercialDAO comercialDAO, PedidoDAO pedidoDAO) {
-		this.comercialDAO = comercialDAO;
-		this.pedidoDAO = pedidoDAO;
 	}
 	
 	public List<Comercial> listAll() {
@@ -40,19 +34,19 @@ public class ComercialService {
 			return null;
 	}
 	
-	/*public ComercialDTO oneDTO(Integer id) {
+	public ComercialDTO oneDTO(Integer id) {
+		PedidoDAO pedidoDAO = new PedidoDAOImpl();
 		Optional<Comercial> optCom = comercialDAO.find(id);
 		if (optCom.isPresent()) {
 			Comercial c = optCom.get();
 			ComercialDTO comercialDTO = new ComercialDTO(c);
-			pedidoDAO = new PedidoDAO();
 			comercialDTO.setListaPedidosDTO(pedidoDAO.getAllDTO(comercialDTO.getId()));
 			return comercialDTO;
 		}
 			
 		else 
 			return null;
-	}*/
+	}
 	
 	public void newComercial(Comercial comercial) {
 		
