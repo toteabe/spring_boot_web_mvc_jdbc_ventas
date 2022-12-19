@@ -67,7 +67,7 @@
 			<div style="float: left;width: 14%" th:text="${comercial.apellido2 ?: '&nbsp;'}">apellido2</div>
 			<div style="float: left;width: 14%" th:text="${comercial.comision}">comision</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<form th:action="@{/comerciales/__${comercial.id}__}" style="display: inline;">
+				<form th:action="@{/comerciales/}+${comercial.id}" style="display: inline;">
     				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 				<form th:action="@{/comerciales/editar/}+${comercial.id} " style="display: inline;">
@@ -75,6 +75,7 @@
 				</form>
 				<form th:action="@{/comerciales/borrar/}+${comercial.id}" method="post" style="display: inline;">					
     				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
+    			</form>
 			</div>
 		</div>
 	</div>

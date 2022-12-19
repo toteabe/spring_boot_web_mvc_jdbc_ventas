@@ -37,8 +37,8 @@ public class ComercialController {
 	@GetMapping("/comerciales/{id}")
 	public String detalle(Model model, @PathVariable Integer id ) {
 		
-		Comercial comercial = comercialService.one(id);
-		//ComercialDTO comercial = comercialService.oneDTO(id);
+		//Comercial comercial = comercialService.one(id);
+		ComercialDTO comercial = comercialService.oneDTO(id);
 		model.addAttribute("comercial", comercial);
 		
 		return "detalle-comercial";
