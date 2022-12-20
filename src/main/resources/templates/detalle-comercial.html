@@ -17,14 +17,14 @@
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
-				<h1>Detalle Comercial</h1>
+				<h1 th:text="#{detalle_comercial}"></h1>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				
 				<div style="position: absolute; left: 39%; top : 39%;">
 					
 						<form action="/comerciales" >
-							<input type="submit" value="Volver" />
+							<input type="submit" th:value="#{volver}" />
 						</form>
 					</div>
 				
@@ -36,50 +36,50 @@
 		</div>
 
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				<label>Código</label>
-			</div>
+			<div th:text="#{id}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:value="${comercial.id}" value="Id" readonly="readonly"/>
 			</div> 
 		</div>
 		
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				<label>Nombre</label>
-			</div>
+			<div th:text="#{nombre}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:value="${comercial.nombre}" value="nombre" readonly="readonly"/>
 			</div> 
 		</div>
 		
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				<label>Apellido 1</label>
-			</div>
+			<div th:text="#{apellido1}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:value="${comercial.apellido1}" value="apellido1" readonly="readonly"/>
 			</div> 
 		</div>
 		
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				<label>Apellido 2</label>
-			</div>
+			<div th:text="#{apellido2}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:value="${comercial.apellido2}" value="apellido2" readonly="readonly"/>
 			</div> 
 		</div>
 		
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				<label>Comisión</label>
-			</div>
+			<div th:text="#{comision}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:value="${comercial.comision}" value="comision" readonly="readonly"/>
 			</div> 
 		</div>
-
+		
+		<h2 th:text="#{lista_de_pedidos}" style="margin-top: 25px;" class="clearfix"></h2>
+		<div th:if="${comercial.listaPedidosDTO.size() != 0}"  th:each="pedido : ${comercial.listaPedidosDTO}" style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 14%" th:text="${pedido.id}"></div>
+			<a th:href="@{/clientes/}+${pedido.id_cliente}"style="float: left;width: 14%" th:text="${pedido.nombreCliente}"></a>
+			<div style="float: left;width: 14%" th:text="${pedido.total}"></div>
+			<div style="float: left;width: 14%" th:text="${pedido.fecha}"></div>
+		</div>
+		<div th:if="${comercial.listaPedidosDTO.size() == 0}">
+			<p th:text="#{no_pedidos_comercial}"></p>
+		</div>
 </div>
 
 </body>

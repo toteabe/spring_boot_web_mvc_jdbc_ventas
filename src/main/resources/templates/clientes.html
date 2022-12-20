@@ -11,22 +11,22 @@
 }
 
 </style>
+<link th:href="@{/css/style.css}" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<body>
-
+	<!--
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 95%;" >
 		<div class="clearfix">
 
 			<div style="float: left; width: 50%">
-				<h1>Clientes</h1>
+				<h1 th:text="#{clientes}"></h1>
 			</div>
 
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				<div style="position: absolute; left: 39%; top : 39%;">
 					<form action="/clientes/crear">
-						<input type="submit" value="Crear">
+						<input type="submit" th:value="#{crear}">
 					</form>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 		<div>
 			<div>
 				<form action="/comerciales">
-					<input type="submit" value="Comercial">
+					<input type="submit" th:value="#{comerciales}">
 				</form>
 			</div>
 		</div>
@@ -50,20 +50,22 @@
 		</div>
 
 		<div class="clearfix">
-			<div style="float: left;width: 14%">Id</div>
-			<div style="float: left;width: 14%">Nombre</div>
-			<div style="float: left;width: 14%">Apellido1</div>
-			<div style="float: left;width: 14%">Apellido2</div>
-			<div style="float: left;width: 14%">Ciudad</div>
-			<div style="float: left;width: 14%">Categoría</div>
-			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
+		<div style="float: left;width: 5%">Id</div>
+			<div th:text="#{imagen}" style="float: left;width: 5%"></div>
+			<div th:text="#{nombre}" style="float: left;width: 14%"></div>
+			<div th:text="#{apellido1}" style="float: left;width: 14%"></div>
+			<div th:text="#{apellido2}" style="float: left;width: 14%"></div>
+			<div th:text="#{ciudad}" style="float: left;width: 14%"></div>
+			<div th:text="#{categoria}" style="float: left;width: 14%"></div>
+			<div th:text="#{accion}" style="float: none;width: auto;overflow: hidden;"></div>
 		</div>
 		<div class="clearfix">
 			<hr/>
 		</div>
 
 		<div  th:each="cliente : ${listaClientes}" style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 14%" th:text="${cliente.id}">0</div>
+			<div style="float: left;width: 5%" th:text="${cliente.id}">0</div>
+			<div style="float: left;width: 5%"><i class="fa-regular fa-circle-user" style="font-size: 30px;"></i></div>
 			<div style="float: left;width: 14%" th:text="${cliente.nombre}">nombre</div>
 			<div style="float: left;width: 14%" th:text="${cliente.apellido1}">apellido1</div>
 			<div style="float: left;width: 14%" th:text="${cliente.apellido2 ?: '&nbsp;'}">apellido2</div>
@@ -82,6 +84,59 @@
 			</div>
 		</div>
 	</div>
-</body>
+-->
+
+	<header>
+		<section class="contenedor">
+			<h1><a th:text="#{administracion}" th:href="@{/}"></a></h1>
+			<nav>
+				<ul>
+					<li><a th:text="@{clientes}" th:href="@{/clientes}"></a></li>
+					<li><a th:text="@{comerciales}" th:href="@{/comerciales}"></a></li>
+				</ul>
+			</nav>
+		</section>
+	</header>
+
+	<main class="contenedor">
+		<section class="filtros">
+			<form action="/clientes/crear">
+				<input type="submit" th:value="#{crear}">
+			</form>
+		</section>
+
+		<section class="listado">
+			<div class="informacion" th:each="cliente : ${listaClientes}">
+				<i class="fotoPerfil fa-regular fa-circle-user"></i>
+				<div class="datos">
+					<h3 class="zonaSuperior" th:text="${cliente.id} + '. ' + ${cliente.nombre} + ' ' + ${cliente.apellido1} + ' ' + ${cliente.apellido2 ?: '&nbsp;'}"></h3>
+					<div class="zonaInferior">
+						<div class="zonaIzquierda">
+							<div class="localizacion">
+							<i class="fa-solid fa-location-dot"></i>
+							<p th:text="${cliente.ciudad}"></p>
+						</div>
+						<div class="categoria">
+
+							<p th:text="#{categoria} + ': ' + ${cliente.categoria}"></p>
+						</div>
+					</div>
+						
+					<div class="zonaDerecha">
+						<form th:action="@{/clientes/__${cliente.id}__}" style="display: inline;">
+							<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+						</form>
+						<form th:action="@{/clientes/editar/}+${cliente.id} " style="display: inline;">
+							<button type="submit"><i class="fa-solid fa-gear"></i></button>
+						</form>
+						<form th:action="@{/clientes/borrar/}+${cliente.id}" method="post" style="display: inline;">					
+							<button type="submit"><i class="fa-solid fa-xmark"></i></button>
+						</form>
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </body>
 </html>

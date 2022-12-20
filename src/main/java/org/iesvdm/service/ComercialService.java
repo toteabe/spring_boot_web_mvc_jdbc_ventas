@@ -9,6 +9,7 @@ import org.iesvdm.dao.PedidoDAOImpl;
 import org.iesvdm.dto.ComercialDTO;
 import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.modelo.Comercial;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,8 +35,10 @@ public class ComercialService {
 			return null;
 	}
 	
+	@Autowired
+	private PedidoDAO pedidoDAO;
+	
 	public ComercialDTO oneDTO(Integer id) {
-		PedidoDAO pedidoDAO = new PedidoDAOImpl();
 		Optional<Comercial> optCom = comercialDAO.find(id);
 		if (optCom.isPresent()) {
 			Comercial c = optCom.get();

@@ -24,7 +24,7 @@ public class PedidoDAOImpl implements PedidoDAO{
 		
 
 		List<PedidoDTO> listPed = jdbcTemplate.query(
-                "SELECT P.*, C.nombre as nombre_cliente FROM pedido P inner join cliente C on P.id_cliente = C.id WHERE id_comercial = ?",
+                "SELECT P.*, C.nombre as nombre_cliente FROM pedido P inner join cliente C on P.id_cliente = C.id WHERE P.id_comercial = ?",
                 (rs, rowNum) -> new PedidoDTO(rs.getInt("id"),
                 						 	rs.getDouble("total"),
                 						 	rs.getDate("fecha"),
@@ -33,7 +33,7 @@ public class PedidoDAOImpl implements PedidoDAO{
                 						 	rs.getString("nombre_cliente") 
                 						 	),
                 idComercial
-        );
+				);
 		
 		log.info("Devueltos {} registros.", listPed.size());
 		

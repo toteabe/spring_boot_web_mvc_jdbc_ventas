@@ -11,7 +11,6 @@
 }
 
 </style>
-<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <body>
@@ -19,14 +18,14 @@
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 95%;" >
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
-				<h1 th:text="#{comerciales}"></h1>
+				<h1>Comerciales</h1>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				
 				<div style="position: absolute; left: 39%; top : 39%;">
 					
-						<form action="comerciales/crear">
-							<input type="submit" th:value="#{crear}">
+						<form action="comerciales">
+							<input type="submit" value="Crear">
 						</form>
 					</div>
 				
@@ -40,7 +39,7 @@
 		<div>
 			<div>
 					<form action="/clientes">
-						<input type="submit" th:value="#{clientes}">
+						<input type="submit" value="Clientes">
 					</form>
 			</div>
 		</div>
@@ -49,12 +48,12 @@
 			<hr/>
 		</div>
 		<div class="clearfix">
-			<div th:text="#{id}" style="float: left;width: 14%"></div>
-			<div th:text="#{nombre}" style="float: left;width: 14%"></div>
-			<div th:text="#{apellido1}" style="float: left;width: 14%"></div>
-			<div th:text="#{apellido2}" style="float: left;width: 14%"></div>
-			<div th:text="#{comision}" style="float: left;width: 14%"></div>
-			<div th:text="#{accion}" style="float: none;width: auto;overflow: hidden;"></div>
+			<div style="float: left;width: 14%">Id</div>
+			<div style="float: left;width: 14%">Nombre</div>
+			<div style="float: left;width: 14%">Apellido1</div>
+			<div style="float: left;width: 14%">Apellido2</div>
+			<div style="float: left;width: 14%">Comisión</div>
+			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
 		</div>
 		<div class="clearfix">
 			<hr/>
@@ -67,21 +66,17 @@
 			<div style="float: left;width: 14%" th:text="${comercial.apellido2 ?: '&nbsp;'}">apellido2</div>
 			<div style="float: left;width: 14%" th:text="${comercial.comision}">comision</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<form th:action="@{/comerciales/}+${comercial.id}" style="display: inline;">
-    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<form th:action="@{/comerciales/__${comercial.id}__}" style="display: inline;">
+    				<input type="submit" value="Ver Detalle" />
 				</form>
 				<form th:action="@{/comerciales/editar/}+${comercial.id} " style="display: inline;">
-    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
+    				<input type="submit" value="Editar" />
 				</form>
-				<form th:action="@{/comerciales/borrar/}+${comercial.id}" method="post" style="display: inline;">					
-    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
-    			</form>
+				<form th:action="@{/comerciales/borrar/__${comercial.}_id_}" method="post" style="display: inline;">					
+    				<input type="submit" value="Eliminar" />
+				</form>
 			</div>
 		</div>
-	</div>
-
-	<div id="contenedora2">
-		
 	</div>
 </body>
 </body>
