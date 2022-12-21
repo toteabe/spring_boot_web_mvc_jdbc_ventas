@@ -10,6 +10,18 @@
 	clear: both;
 }
 
+.verde {
+	background-color: green;
+}
+
+.blanco {
+	background-color: white;
+}
+
+.rojo {
+	background-color: yellow;
+}
+
 </style>
 </head>
 <body>
@@ -72,12 +84,35 @@
 		
 		<h2 th:text="#{lista_de_pedidos}" style="margin-top: 25px;" class="clearfix"></h2>
 		<div th:if="${comercial.listaPedidosDTO.size() != 0}"  th:each="pedido : ${comercial.listaPedidosDTO}" style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 14%" th:text="${pedido.id}"></div>
-			<a th:href="@{/clientes/}+${pedido.id_cliente}"style="float: left;width: 14%" th:text="${pedido.nombreCliente}"></a>
-			<div style="float: left;width: 14%" th:text="${pedido.total}"></div>
-			<div style="float: left;width: 14%" th:text="${pedido.fecha}"></div>
+			<div th:class="${pedido.total} == ${comercial.max()} ? 'verde' : (${pedido.total} == ${comercial.min()} ? 'rojo' : 'blanco')">
+				<div style="float: left;width: 14%" th:text="${pedido.id}"></div>
+				<a th:href="@{/clientes/}+${pedido.id_cliente}" style="float: left;width: 14%" th:text="${pedido.nombreCliente}"></a>
+				<div style="float: left;width: 14%" th:text="${pedido.total}"></div>
+				<div style="float: left;width: 14%" th:text="${pedido.fecha}"></div>
+				&nbsp
+			</div>
 		</div>
+		
 		<div th:if="${comercial.listaPedidosDTO.size() == 0}">
+			<p th:text="#{no_pedidos_comercial}"></p>
+		</div>
+		
+		<h2 th:text="#{estadisticas}" tyle="margin-top: 25px;" class="clearfix"></h2>
+		<p th:text="#{total} + ': ' + ${comercial.listaPedidosTotal()}"></p>
+		<p th:text="#{media} + ': ' + ${comercial.listaPedidosMedia()}"></p>
+		
+		<h2 th:text="#{lista_de_pedidos}" style="margin-top: 25px;" class="clearfix"></h2>
+		<div th:if="${comercial.listaPedidosDTO.size() != 0}"  th:each="pedido : ${comercial.listaOrdenada()}" style="margin-top: 6px;" class="clearfix">
+			<div th:class="${pedido.total} == ${comercial.max()} ? 'verde' : (${pedido.total} == ${comercial.min()} ? 'rojo' : 'blanco')">
+				<div style="float: left;width: 14%" th:text="${pedido.id}"></div>
+				<a th:href="@{/clientes/}+${pedido.id_cliente}" style="float: left;width: 14%" th:text="${pedido.nombreCliente}"></a>
+				<div style="float: left;width: 14%" th:text="${pedido.total}"></div>
+				<div style="float: left;width: 14%" th:text="${pedido.fecha}"></div>
+				&nbsp
+			</div>
+		</div>
+		
+		<div th:if="${comercial.listaOrdenada().size() == 0}">
 			<p th:text="#{no_pedidos_comercial}"></p>
 		</div>
 </div>
