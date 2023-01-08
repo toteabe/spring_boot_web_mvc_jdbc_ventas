@@ -107,7 +107,8 @@
 
 		<section class="listado">
 			<div class="informacion" th:each="cliente : ${listaClientes}">
-				<!-- <i class="fotoPerfil fa-regular fa-circle-user"></i> -->
+				<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
+				<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
 				<div class="datos">
 					<h3 class="zonaSuperior" th:text="${cliente.id} + '. ' + ${cliente.nombre} + ' ' + ${cliente.apellido1} + ' ' + ${cliente.apellido2 ?: '&nbsp;'}"></h3>
 					<div class="zonaInferior">

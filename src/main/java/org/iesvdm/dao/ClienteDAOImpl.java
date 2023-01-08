@@ -32,8 +32,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 		
 							//Desde java15+ se tiene la triple quote """ para bloques de texto como cadenas.
 		String sqlInsert = """
-							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría) 
-							VALUES  (     ?,         ?,         ?,       ?,         ?)
+							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría, fotoPerfil) 
+							VALUES  (     ?,         ?,         ?,       ?,         ?,		?)
 						   """;
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -45,7 +45,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ps.setString(idx++, cliente.getApellido1());
 			ps.setString(idx++, cliente.getApellido2());
 			ps.setString(idx++, cliente.getCiudad());
-			ps.setInt(idx, cliente.getCategoria());
+			ps.setInt(idx++, cliente.getCategoria());
+			ps.setString(idx, null);
 			return ps;
 		},keyHolder);
 		
@@ -76,7 +77,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 						 	rs.getString("apellido1"),
                 						 	rs.getString("apellido2"),
                 						 	rs.getString("ciudad"),
-                						 	rs.getInt("categoría")
+                						 	rs.getInt("categoría"),
+                						 	rs.getString("fotoPerfil")
                 						 	)
         );
 		
@@ -99,7 +101,8 @@ public class ClienteDAOImpl implements ClienteDAO {
             						 						rs.getString("apellido1"),
             						 						rs.getString("apellido2"),
             						 						rs.getString("ciudad"),
-            						 						rs.getInt("categoría")) 
+            						 						rs.getInt("categoría"),
+            						 						rs.getString("fotoPerfil")) 
 								, id
 								);
 		
@@ -116,19 +119,24 @@ public class ClienteDAOImpl implements ClienteDAO {
 	@Override
 	public void update(Cliente cliente) {
 		
+		if (cliente.getFotoPerfil().equals(""))
+			cliente.setFotoPerfil(null);
+		
 		int rows = jdbcTemplate.update("""
 										UPDATE cliente SET 
 														nombre = ?, 
 														apellido1 = ?, 
 														apellido2 = ?,
 														ciudad = ?,
-														categoría = ?  
+														categoría = ?,
+														fotoPerfil = ? 
 												WHERE id = ?
 										""", cliente.getNombre()
 										, cliente.getApellido1()
 										, cliente.getApellido2()
 										, cliente.getCiudad()
 										, cliente.getCategoria()
+										, cliente.getFotoPerfil()
 										, cliente.getId());
 		
 		log.info("Update de Cliente con {} registros actualizados.", rows);

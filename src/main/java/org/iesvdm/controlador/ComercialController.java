@@ -2,7 +2,7 @@ package org.iesvdm.controlador;
 
 import java.util.List;
 
-import org.iesvdm.dto.ComercialDTO;
+import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ComercialService;
 import org.springframework.stereotype.Controller;
@@ -37,9 +37,22 @@ public class ComercialController {
 	@GetMapping("/comerciales/{id}")
 	public String detalle(Model model, @PathVariable Integer id ) {
 		
-		//Comercial comercial = comercialService.one(id);
-		ComercialDTO comercial = comercialService.oneDTO(id);
+		Comercial comercial = comercialService.one(id);
+		List<PedidoDTO> listaPedidos = comercialService.oneListaPedidos(id);
+		List<PedidoDTO> listaPedidosOrdenada = comercialService.ordenarLista(listaPedidos);
+		double total = comercialService.pedidoTotal(listaPedidos);
+		double media = comercialService.pedidoMedia(listaPedidos);
+		double max = comercialService.pedidoTotalMax(listaPedidos);
+		double min = comercialService.pedidoTotalMin(listaPedidos);
+		
 		model.addAttribute("comercial", comercial);
+		model.addAttribute("listaPedidos", listaPedidos);
+		model.addAttribute("listaPedidosOrdenada", listaPedidosOrdenada);
+		model.addAttribute("total", total);
+		model.addAttribute("media", media);
+		model.addAttribute("max", max);
+		model.addAttribute("min", min);
+		
 		
 		return "detalle-comercial";
 		

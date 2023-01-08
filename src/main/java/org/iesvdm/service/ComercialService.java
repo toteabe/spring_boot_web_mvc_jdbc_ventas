@@ -1,12 +1,16 @@
 package org.iesvdm.service;
 
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.reverseOrder;
+import static java.util.stream.Collectors.toList;
+
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.dao.ComercialDAO;
 import org.iesvdm.dao.PedidoDAO;
 import org.iesvdm.dao.PedidoDAOImpl;
-import org.iesvdm.dto.ComercialDTO;
 import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.modelo.Comercial;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ComercialService {
 	
+	@Autowired
+	private PedidoDAO pedidoDAO;
+	
+	private static final DecimalFormat df = new DecimalFormat("0.00");
 	private ComercialDAO comercialDAO;
 	
 	public ComercialService(ComercialDAO comercialDAO) {
@@ -35,20 +43,61 @@ public class ComercialService {
 			return null;
 	}
 	
-	@Autowired
-	private PedidoDAO pedidoDAO;
+	public List<PedidoDTO> oneListaPedidos(Integer id) {
+		List<PedidoDTO> listaPedidos = pedidoDAO.getAllDTO(id);
+		return listaPedidos;
+	}
 	
-	public ComercialDTO oneDTO(Integer id) {
-		Optional<Comercial> optCom = comercialDAO.find(id);
-		if (optCom.isPresent()) {
-			Comercial c = optCom.get();
-			ComercialDTO comercialDTO = new ComercialDTO(c);
-			comercialDTO.setListaPedidosDTO(pedidoDAO.getAllDTO(comercialDTO.getId()));
-			return comercialDTO;
+	public List<PedidoDTO> ordenarLista(List<PedidoDTO> lista) {
+		
+		return lista.stream()
+				.sorted(comparing(PedidoDTO::getTotal, reverseOrder()))
+				.collect(toList());
+	}
+	
+	public double pedidoTotal(List<PedidoDTO> lista) {
+		
+		double total = 0;
+		if (lista.size() != 0) {
+			for (PedidoDTO p : lista) {
+				total += p.getTotal();
+			}
 		}
-			
-		else 
-			return null;
+		return total;
+	}
+	
+	public double pedidoMedia(List<PedidoDTO> lista) {
+		
+		double media = 0;
+		if (lista.size() != 0)
+			media = pedidoTotal(lista) / lista.size();
+		return media;
+	}
+	
+	public double pedidoTotalMax(List<PedidoDTO> lista) {
+		
+		double max = 0;
+		if (lista.size() != 0) {
+			max = lista.get(0).getTotal();
+			for (PedidoDTO p : lista) {
+				if (p.getTotal() > max)
+					max = p.getTotal();
+			}
+		}
+		return max;
+	}
+	
+	public double pedidoTotalMin(List<PedidoDTO> lista) {
+		
+		double min = 0;
+		if (lista.size() != 0) {
+			min = lista.get(0).getTotal();
+			for (PedidoDTO p : lista) {
+				if (p.getTotal() < min)
+					min = p.getTotal();
+			}
+		}
+		return min;
 	}
 	
 	public void newComercial(Comercial comercial) {
