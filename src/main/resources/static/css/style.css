@@ -12,6 +12,9 @@
 header {
   background-color: #FCF5C7;
   padding: 10px 0px;
+  z-index: 1;
+  position: sticky;
+  top: 0;
 }
 header section {
   display: -webkit-box;
@@ -73,16 +76,14 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 20px auto 0px auto;
 }
 main .filtros {
+  position: sticky;
+  top: 50%;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 15%;
           flex: 0 1 15%;
