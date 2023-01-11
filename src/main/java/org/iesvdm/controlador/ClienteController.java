@@ -1,18 +1,27 @@
 package org.iesvdm.controlador;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.service.ClienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import jakarta.validation.Path;
+import jakarta.validation.Valid;
 
 @Controller
 //Se puede fijar ruta base de las peticiones de este controlador.
@@ -22,6 +31,8 @@ import org.springframework.web.servlet.view.RedirectView;
 public class ClienteController {
 	
 	private ClienteService clienteService;
+	
+	 public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 	
 	//Se utiliza inyección automática por constructor del framework Spring.
 	//Por tanto, se puede omitir la anotación Autowired
@@ -63,7 +74,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/clientes/crear")
-	public RedirectView submitCrear(@ModelAttribute("cliente") Cliente cliente) {
+	public RedirectView submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResulted) {
 		
 		clienteService.newCliente(cliente);
 				
@@ -83,9 +94,15 @@ public class ClienteController {
 	
 	
 	@PostMapping("/clientes/editar/{id}")
-	public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente) {
+	public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente, @RequestParam("file") MultipartFile file)  throws IOException {
 		
-		clienteService.replaceCliente(cliente);		
+		clienteService.replaceCliente(cliente);
+		
+		/*StringBuilder fileNames = new StringBuilder();
+        java.nio.file.Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        fileNames.append(file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());*/
+        //model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
 		
 		return new RedirectView("/clientes");
 	}
