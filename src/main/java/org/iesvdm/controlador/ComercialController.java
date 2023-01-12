@@ -22,8 +22,8 @@ public class ComercialController {
 	
 	private ComercialService comercialService;
 	
-	/*@Autowired
-	private PedidoMapper pedidoMapper;*/
+	//@Autowired
+	//private PedidoMapper pedidoMapper;
 	
 	public ComercialController(ComercialService comercialService) {
 		this.comercialService = comercialService;

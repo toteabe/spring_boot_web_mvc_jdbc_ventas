@@ -10,6 +10,10 @@
 	clear: both;
 }
 
+.gris {
+	background-color: aliceblue;
+}
+
 </style>
 <link th:href="@{/css/style.css}" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
@@ -106,7 +110,7 @@
 		</section>
 
 		<section class="listado">
-			<div class="informacion" th:each="cliente : ${listaClientes}">
+			<div class="informacion" th:classappend="${cliente.id % 2 != 0} ? gris : ''" th:each="cliente : ${listaClientes}">
 				<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
 				<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
 				<div class="datos">

@@ -5,12 +5,12 @@ import org.iesvdm.dto.PedidoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-//@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface PedidoMapper {
 
-	/*@Mapping(target = "nombreCliente", source = "nombreClienteIn")
+	@Mapping(target = "nombreCliente", source = "nombreClienteIn")
 	public PedidoDTO pedidoAPedidoDTo(Pedido pedido, String nombreClienteIn);
 	
-	public Pedido pedidoDTOAPedido(PedidoDTO pedido);*/
+	public Pedido pedidoDTOAPedido(PedidoDTO pedido);
 	
 }

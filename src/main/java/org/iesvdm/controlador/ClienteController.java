@@ -94,15 +94,9 @@ public class ClienteController {
 	
 	
 	@PostMapping("/clientes/editar/{id}")
-	public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente, @RequestParam("file") MultipartFile file)  throws IOException {
+	public RedirectView submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResulted) {
 		
 		clienteService.replaceCliente(cliente);
-		
-		/*StringBuilder fileNames = new StringBuilder();
-        java.nio.file.Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        fileNames.append(file.getOriginalFilename());
-        Files.write(fileNameAndPath, file.getBytes());*/
-        //model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
 		
 		return new RedirectView("/clientes");
 	}
