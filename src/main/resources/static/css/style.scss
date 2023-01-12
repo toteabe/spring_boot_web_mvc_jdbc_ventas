@@ -76,11 +76,28 @@ main {
         position: sticky;
         top: 50%;
         flex: 0 1 15%;
-        border-right: 1px solid #000000;
+        background-color: aliceblue;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+
+        input {
+            
+            padding: 5px 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            border: 2px solid black;
+        }
+
+        input:hover {
+            background-color: rgb(201, 192, 192);
+        }
     }
 
     .listado {
-        flex: 0 1 80%;
+        flex: 0 1 83%;
         display: flex;
         flex-direction: column;
         
@@ -88,9 +105,8 @@ main {
         .informacion {
             display: flex;
             flex-direction: row;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #000000;
-            padding-bottom: 15px;
+            padding: 10px;
+            border-radius: 20px;
 
             .fotoPerfil {
                 width: 50px;
@@ -132,9 +148,7 @@ main {
                                 padding-left: 10px;
                             }
                         }
-                    }
-
-                    
+                    }     
 
                     .zonaDerecha {
                         flex: 0 1 12%;
