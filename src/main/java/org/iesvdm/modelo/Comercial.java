@@ -26,6 +26,5 @@ public class Comercial {
 	private String apellido2;
 	
 	private float comision;
-	//private String fotoPerfil;
 	
 }

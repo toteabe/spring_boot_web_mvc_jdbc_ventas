@@ -1,11 +1,10 @@
 package org.iesvdm.controlador;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
+import org.iesvdm.dto.ComercialDTO;
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ClienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
-import jakarta.validation.Path;
 import jakarta.validation.Valid;
 
 @Controller
@@ -33,7 +27,7 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	 public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
-	
+	 
 	//Se utiliza inyección automática por constructor del framework Spring.
 	//Por tanto, se puede omitir la anotación Autowired
 	//@Autowired
@@ -57,7 +51,10 @@ public class ClienteController {
 	public String detalle(Model model, @PathVariable Integer id ) {
 		
 		Cliente cliente = clienteService.one(id);
+		List<ComercialDTO> listaComerciales = clienteService.listarComerciales(id);
+		
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("listaComerciales", listaComerciales);
 		
 		return "detalle-cliente";
 		

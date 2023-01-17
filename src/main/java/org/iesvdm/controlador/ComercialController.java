@@ -3,7 +3,7 @@ package org.iesvdm.controlador;
 import java.util.List;
 
 import org.iesvdm.dto.PedidoDTO;
-import org.iesvdm.mapstruct.PedidoMapper;
+import org.iesvdm.mapstruct.ComercialMapper;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,6 @@ import org.springframework.web.servlet.view.RedirectView;
 public class ComercialController {
 	
 	private ComercialService comercialService;
-	
-	//@Autowired
-	//private PedidoMapper pedidoMapper;
 	
 	public ComercialController(ComercialService comercialService) {
 		this.comercialService = comercialService;

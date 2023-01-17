@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.Comercial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -153,6 +154,25 @@ public class ClienteDAOImpl implements ClienteDAO {
 		
 		log.info("Delete de Cliente con {} registros eliminados.", rows);		
 		
+	}
+	
+	@Override
+	public List<Comercial> listarComerciales(int id) {
+		
+		List<Comercial> listCom = jdbcTemplate.query(
+                "SELECT C.* FROM comercial C INNER JOIN pedido P ON C.id = P.id_comercial WHERE P.id_cliente = ? GROUP BY C.id;",
+                (rs, rowNum) -> new Comercial(rs.getInt("id"),
+                						 	rs.getString("nombre"),
+                						 	rs.getString("apellido1"),
+                						 	rs.getString("apellido2"),
+                						 	rs.getFloat("comisión")
+                						 	),
+                id
+        );
+		
+		log.info("Devueltos {} registros.", listCom.size());
+		
+        return listCom;
 	}
 	
 }

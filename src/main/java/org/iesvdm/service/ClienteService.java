@@ -1,16 +1,30 @@
 package org.iesvdm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.iesvdm.dao.ClienteDAO;
+import org.iesvdm.dao.PedidoDAO;
+import org.iesvdm.dto.ComercialDTO;
+import org.iesvdm.mapstruct.ComercialMapper;
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.Comercial;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
 	
+	@Autowired
+	private ComercialMapper comercialMapper;
+	
 	private ClienteDAO clienteDAO;
+	
+	@Autowired
+	private PedidoDAO pedidoDAO;
+	
+	
 	
 	//Se utiliza inyección automática por constructor del framework Spring.
 	//Por tanto, se puede omitir la anotación Autowired
@@ -31,6 +45,19 @@ public class ClienteService {
 			return optCli.get();
 		else 
 			return null;
+	}
+	
+	public List<ComercialDTO> listarComerciales(Integer id) {
+		
+		List<Comercial> lista = clienteDAO.listarComerciales(id);
+		List<ComercialDTO> listaDTO = new ArrayList<>();
+		
+		for (Comercial comercial : lista) {
+			listaDTO.add(comercialMapper.comercialAComercialDTO(comercial, pedidoDAO.getAll(comercial.getId())));
+		}
+		
+		return listaDTO;
+		
 	}
 	
 	public void newCliente(Cliente cliente) {

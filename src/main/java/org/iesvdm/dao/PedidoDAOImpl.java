@@ -20,6 +20,26 @@ public class PedidoDAOImpl implements PedidoDAO{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
+	public List<Pedido> getAll(int idComercial) {
+		
+
+		List<Pedido> listPed = jdbcTemplate.query(
+                "SELECT P.* FROM pedido P inner join cliente C on P.id_cliente = C.id WHERE P.id_comercial = ?",
+                (rs, rowNum) -> new Pedido(rs.getInt("id"),
+                						 	rs.getDouble("total"),
+                						 	rs.getDate("fecha"),
+                						 	rs.getInt("id_cliente"),
+                						 	rs.getInt("id_comercial")
+                						 	),
+                idComercial
+				);
+		
+		log.info("Devueltos {} registros.", listPed.size());
+		
+        return listPed;
+	}
+	
+	@Override
 	public List<PedidoDTO> getAllDTO(int idComercial) {
 		
 
@@ -39,4 +59,5 @@ public class PedidoDAOImpl implements PedidoDAO{
 		
         return listPed;
 	}
+	
 }

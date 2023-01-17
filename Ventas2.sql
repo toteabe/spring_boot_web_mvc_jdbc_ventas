@@ -68,3 +68,8 @@ INSERT INTO pedido VALUES(15, 370.85, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(16, 2389.23, '2019-03-11', 1, 5);
 
 select * from cliente;
+select P.* from pedido P inner join cliente C on P.id_cliente = C.id where C.id = 1;
+SELECT C.* FROM comercial C 
+	INNER JOIN pedido P ON C.id = P.id_comercial
+	WHERE P.id_cliente = 3
+	GROUP BY C.id;

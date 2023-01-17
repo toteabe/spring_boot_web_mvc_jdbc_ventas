@@ -76,6 +76,24 @@
 				<input th:value="${cliente.categoria}" value="categoria" readonly="readonly"/>
 			</div> 
 		</div>
+		
+		<h2 th:text="#{listaComerciales}" style="margin-top: 25px;" class="clearfix"></h2>
+		<div th:if="${listaComerciales.size() != 0}"  th:each="comercial : ${listaComerciales}" style="margin-top: 6px; display: flex; flex-direction: column;" class="clearfix">
+			<div>
+				<div style="float: left;width: 14%" th:text="${comercial.id}"></div>
+				<a th:href="@{/comerciales/}+${comercial.id}" style="float: left;width: 14%" th:text="${comercial.nombre}"></a>
+				<div style="float: left;width: 14%" th:text="${comercial.apellido1}"></div>
+				<div style="float: left;width: 14%" th:text="${comercial.apellido2}"></div>
+				<div style="float: left;width: 14%" th:text="${comercial.comision}">
+			</div>
+			<div>
+				<div style="float: left;width: 14%;" th:text="${comercial.listaPedidos.size()}">
+			</div>
+		</div>
+		
+		<div th:if="${listaComerciales.size() == 0}">
+			<p th:text="#{no_pedidos_cliente}"></p>
+		</div>
 
 </div>
 
