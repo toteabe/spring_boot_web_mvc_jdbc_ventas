@@ -53,7 +53,14 @@ public class ClienteService {
 		List<ComercialDTO> listaDTO = new ArrayList<>();
 		
 		for (Comercial comercial : lista) {
-			listaDTO.add(comercialMapper.comercialAComercialDTO(comercial, pedidoDAO.getAll(comercial.getId())));
+			listaDTO.add(comercialMapper.comercialAComercialDTO(
+					comercial, 
+					pedidoDAO.numPedidosComercial(comercial.getId()),
+					pedidoDAO.numPedidosComercial(comercial.getId(), 90),
+					pedidoDAO.numPedidosComercial(comercial.getId(), 181),
+					pedidoDAO.numPedidosComercial(comercial.getId(), 365),
+					pedidoDAO.numPedidosComercial(comercial.getId(), 1825)
+			));
 		}
 		
 		return listaDTO;

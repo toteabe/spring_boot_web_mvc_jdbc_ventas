@@ -73,3 +73,6 @@ SELECT C.* FROM comercial C
 	INNER JOIN pedido P ON C.id = P.id_comercial
 	WHERE P.id_cliente = 3
 	GROUP BY C.id;
+SELECT COUNT(*) FROM pedido
+	WHERE id_comercial = 1
+	AND fecha >= DATE_SUB(NOW(), INTERVAL 90 DAY);

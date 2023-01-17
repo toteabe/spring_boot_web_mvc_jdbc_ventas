@@ -78,22 +78,47 @@
 		</div>
 		
 		<h2 th:text="#{listaComerciales}" style="margin-top: 25px;" class="clearfix"></h2>
-		<div th:if="${listaComerciales.size() != 0}"  th:each="comercial : ${listaComerciales}" style="margin-top: 6px; display: flex; flex-direction: column;" class="clearfix">
-			<div>
+		<div th:if="${comercial.numPedidosTotal != 0}"  th:each="comercial : ${listaComerciales}" style="margin-top: 6px; border: 1px solid black;" class="clearfix">
+			<div style="border-bottom: 1px solid black; background-color: aliceblue"; class="clearfix">
 				<div style="float: left;width: 14%" th:text="${comercial.id}"></div>
 				<a th:href="@{/comerciales/}+${comercial.id}" style="float: left;width: 14%" th:text="${comercial.nombre}"></a>
 				<div style="float: left;width: 14%" th:text="${comercial.apellido1}"></div>
 				<div style="float: left;width: 14%" th:text="${comercial.apellido2}"></div>
-				<div style="float: left;width: 14%" th:text="${comercial.comision}">
+				<div style="float: left;width: 14%" th:text="${comercial.comision}"></div>
 			</div>
-			<div>
-				<div style="float: left;width: 14%;" th:text="${comercial.listaPedidos.size()}">
+			
+			<div th:text="#{pedidosTotal}" style="float: left;width: 50%">Num</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.numPedidosTotal}" readonly="readonly"/>
 			</div>
+			
+			<div th:text="#{pedidosTotalTrimestre}" style="float: left;width: 50%">Num</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.numPedidosTrimestre}" readonly="readonly"/>
+			</div>
+			
+			<div th:text="#{pedidosTotalSemestre}" style="float: left;width: 50%">Num</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.numPedidosSemestre}" readonly="readonly"/>
+			</div>
+			
+			<div th:text="#{pedidosTotalAnio}" style="float: left;width: 50%">Num</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.numPedidosAnio}" readonly="readonly"/>
+			</div>
+			
+			<div th:text="#{pedidosTotalLustro}" style="float: left;width: 50%">Num</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input th:value="${comercial.numPedidosLustro}" readonly="readonly"/>
+			</div>
+			
+			<div th:if="${comercial.numPedidosTotal == 0}">
+				<p th:text="#{no_pedidos_cliente}"></p>
+			</div>
+			
 		</div>
 		
-		<div th:if="${listaComerciales.size() == 0}">
-			<p th:text="#{no_pedidos_cliente}"></p>
-		</div>
+		
 
 </div>
 

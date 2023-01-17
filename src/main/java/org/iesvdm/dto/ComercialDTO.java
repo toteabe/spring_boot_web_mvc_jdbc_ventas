@@ -21,5 +21,9 @@ private int id;
 	private String apellido1;
 	private String apellido2;
 	private float comision;
-	private List<Pedido> listaPedidos;
+	private int numPedidosTotal;
+	private int numPedidosTrimestre;
+	private int numPedidosSemestre;
+	private int numPedidosAnio;
+	private int numPedidosLustro;
 }

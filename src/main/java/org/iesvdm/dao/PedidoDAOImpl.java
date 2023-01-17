@@ -60,4 +60,94 @@ public class PedidoDAOImpl implements PedidoDAO{
         return listPed;
 	}
 	
+	@Override
+	public int numPedidosComercial(int idComercial) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido where id_comercial = ?",
+                Integer.class,
+                idComercial
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}
+	
+	@Override
+	public int numPedidosComercial(int idComercial, int numDias) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido where id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL ? DAY)",
+                Integer.class,
+                idComercial, numDias
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}
+	
+	/*@Override
+	public int numPedidosComercialTrimestre(int idComercial) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido WHERE id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL 90 DAY)",
+                Integer.class,
+                idComercial
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}
+	
+	@Override
+	public int numPedidosComercialSemestre(int idComercial) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido WHERE id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL 181 DAY)",
+                Integer.class,
+                idComercial
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}
+	
+	@Override
+	public int numPedidosComercialAño(int idComercial) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido WHERE id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL 365 DAY)",
+                Integer.class,
+                idComercial
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}
+	
+	@Override
+	public int numPedidosComercialLustro(int idComercial) {
+		
+		int numPedidos = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM pedido WHERE id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL 1825 DAY)",
+                Integer.class,
+                idComercial
+				);
+
+		log.info("El cliente tiene {} pedidos.", numPedidos);
+		
+		return numPedidos;
+
+	}*/
+	
 }
