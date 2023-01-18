@@ -66,13 +66,12 @@ INSERT INTO pedido VALUES(13, 545.75, '2019-01-25', 6, 1);
 INSERT INTO pedido VALUES(14, 145.82, '2017-02-02', 6, 1);
 INSERT INTO pedido VALUES(15, 370.85, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(16, 2389.23, '2019-03-11', 1, 5);
+INSERT INTO pedido VALUES(17, 250.50, '2023-01-10', 7, 5);
 
-select * from cliente;
+select * from pedido;
 select P.* from pedido P inner join cliente C on P.id_cliente = C.id where C.id = 1;
 SELECT C.* FROM comercial C 
 	INNER JOIN pedido P ON C.id = P.id_comercial
 	WHERE P.id_cliente = 3
 	GROUP BY C.id;
-SELECT COUNT(*) FROM pedido
-	WHERE id_comercial = 1
-	AND fecha >= DATE_SUB(NOW(), INTERVAL 90 DAY);
+SELECT COUNT(*) FROM pedido WHERE id_comercial = 1 AND fecha >= DATE_SUB(NOW(), INTERVAL 1864 DAY);
