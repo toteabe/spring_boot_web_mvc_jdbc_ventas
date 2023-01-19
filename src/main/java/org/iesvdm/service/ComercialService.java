@@ -8,9 +8,11 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvdm.dao.ClienteDAO;
 import org.iesvdm.dao.ComercialDAO;
 import org.iesvdm.dao.PedidoDAO;
 import org.iesvdm.dao.PedidoDAOImpl;
+import org.iesvdm.dto.ClienteDTO;
 import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.modelo.Comercial;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ComercialService {
 	
 	@Autowired
 	private PedidoDAO pedidoDAO;
+	
+	@Autowired
+	private ClienteDAO clienteDAO;
 	
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	private ComercialDAO comercialDAO;
@@ -48,11 +53,10 @@ public class ComercialService {
 		return listaPedidos;
 	}
 	
-	public List<PedidoDTO> ordenarLista(List<PedidoDTO> lista) {
+	public List<ClienteDTO> oneListaClientes (Integer id) {
 		
-		return lista.stream()
-				.sorted(comparing(PedidoDTO::getTotal, reverseOrder()))
-				.collect(toList());
+		List<ClienteDTO> listaClientes = clienteDAO.getAllClienteDTO(id);
+		return listaClientes;
 	}
 	
 	public double pedidoTotal(List<PedidoDTO> lista) {

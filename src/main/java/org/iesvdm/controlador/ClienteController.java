@@ -51,7 +51,7 @@ public class ClienteController {
 	public String detalle(Model model, @PathVariable Integer id ) {
 		
 		Cliente cliente = clienteService.one(id);
-		List<ComercialDTO> listaComerciales = clienteService.listarComerciales(id);
+		List<ComercialDTO> listaComerciales = clienteService.listarComerciales(cliente.getId(), id);
 		
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("listaComerciales", listaComerciales);

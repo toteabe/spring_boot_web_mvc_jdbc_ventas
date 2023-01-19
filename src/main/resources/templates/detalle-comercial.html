@@ -101,18 +101,14 @@
 		<p th:text="#{total} + ': ' + ${total}"></p>
 		<p th:text="#{media} + ': ' + ${media}"></p>
 		
-		<h2 th:text="#{lista_de_pedidos}" style="margin-top: 25px;" class="clearfix"></h2>
-		<div th:if="${listaPedidosOrdenada.size() != 0}"  th:each="pedido : ${listaPedidosOrdenada}" style="margin-top: 6px;" class="clearfix">
-			<div th:class="${pedido.total} == ${max} ? 'verde' : (${pedido.total} == ${min} ? 'rojo' : 'blanco')">
-				<div style="float: left;width: 14%" th:text="${pedido.id}"></div>
-				<a th:href="@{/clientes/}+${pedido.id_cliente}" style="float: left;width: 14%" th:text="${pedido.nombreCliente}"></a>
-				<div style="float: left;width: 14%" th:text="${pedido.total}"></div>
-				<div style="float: left;width: 14%" th:text="${pedido.fecha}"></div>
-				&nbsp
-			</div>
+		<h2 th:text="#{lista_de_clientes}" style="margin-top: 25px;" class="clearfix"></h2>
+		<div th:if="${listaClientes.size() != 0}"  th:each="cliente : ${listaClientes}" style="margin-top: 6px;" class="clearfix">
+				<div style="float: left;width: 14%" th:text="${cliente.id}"></div>
+				<a th:href="@{/clientes/}+${cliente.id}" style="float: left;width: 30%" th:text="${cliente.nombre} + ' ' + ${cliente.apellido1} + ' ' + (${cliente.apellido2} == null? ' ': ${cliente.apellido2})"></a>
+				<div style="float: left;width: 14%" th:text="${cliente.pedidoMax}"></div>
 		</div>
 		
-		<div th:if="${listaPedidosOrdenada.size() == 0}">
+		<div th:if="${listaClientes.size() == 0}">
 			<p th:text="#{no_pedidos_comercial}"></p>
 		</div>
 </div>

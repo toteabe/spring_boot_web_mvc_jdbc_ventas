@@ -47,7 +47,7 @@ public class ClienteService {
 			return null;
 	}
 	
-	public List<ComercialDTO> listarComerciales(Integer id) {
+	public List<ComercialDTO> listarComerciales(long idCliente, Integer id) {
 		
 		List<Comercial> lista = clienteDAO.listarComerciales(id);
 		List<ComercialDTO> listaDTO = new ArrayList<>();
@@ -55,11 +55,11 @@ public class ClienteService {
 		for (Comercial comercial : lista) {
 			listaDTO.add(comercialMapper.comercialAComercialDTO(
 					comercial, 
-					pedidoDAO.numPedidosComercial(comercial.getId()),
-					pedidoDAO.numPedidosComercial(comercial.getId(), 90),
-					pedidoDAO.numPedidosComercial(comercial.getId(), 181),
-					pedidoDAO.numPedidosComercial(comercial.getId(), 365),
-					pedidoDAO.numPedidosComercial(comercial.getId(), 1825)
+					pedidoDAO.numPedidosComercial(idCliente, comercial.getId()),
+					pedidoDAO.numPedidosComercial(idCliente, comercial.getId(), 90),
+					pedidoDAO.numPedidosComercial(idCliente, comercial.getId(), 181),
+					pedidoDAO.numPedidosComercial(idCliente, comercial.getId(), 365),
+					pedidoDAO.numPedidosComercial(idCliente, comercial.getId(), 1825)
 			));
 		}
 		

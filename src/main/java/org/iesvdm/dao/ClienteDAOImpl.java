@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvdm.dto.ClienteDTO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -173,6 +174,28 @@ public class ClienteDAOImpl implements ClienteDAO {
 		log.info("Devueltos {} registros.", listCom.size());
 		
         return listCom;
+	}
+	
+	@Override
+	public List<ClienteDTO> getAllClienteDTO(int idComercial) {
+		
+		List<ClienteDTO> lista = jdbcTemplate.query(
+                "select C.*, MAX(P.total) as maxPedido from cliente C left join pedido P on C.id = P.id_cliente where P.id_comercial = ? group by C.id",
+                (rs, rowNum) -> new ClienteDTO(rs.getInt("id"),
+                						 	rs.getString("nombre"),
+                						 	rs.getString("apellido1"),
+                						 	rs.getString("apellido2"),
+                						 	rs.getString("ciudad"),
+                						 	rs.getInt("categoría"),
+                						 	rs.getString("fotoPerfil"),
+                						 	rs.getDouble("maxPedido")
+                						 	),
+                idComercial
+        );
+		
+		log.info("Devueltos {} registros.", lista.size());
+		
+        return lista;
 	}
 	
 }

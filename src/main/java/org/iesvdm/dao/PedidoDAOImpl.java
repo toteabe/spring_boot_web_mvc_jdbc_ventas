@@ -61,12 +61,12 @@ public class PedidoDAOImpl implements PedidoDAO{
 	}
 	
 	@Override
-	public int numPedidosComercial(int idComercial) {
+	public int numPedidosComercial(long idCliente, int idComercial) {
 		
 		int numPedidos = jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM pedido where id_comercial = ?",
+                "SELECT COUNT(*) FROM pedido where id_comercial = ? and id_cliente = ?",
                 Integer.class,
-                idComercial
+                idComercial, idCliente
 				);
 
 		log.info("El cliente tiene {} pedidos.", numPedidos);
@@ -76,12 +76,12 @@ public class PedidoDAOImpl implements PedidoDAO{
 	}
 	
 	@Override
-	public int numPedidosComercial(int idComercial, int numDias) {
+	public int numPedidosComercial(long idCliente, int idComercial, int numDias) {
 		
 		int numPedidos = jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM pedido where id_comercial = ? AND fecha >= DATE_SUB(NOW(), INTERVAL ? DAY)",
+                "SELECT COUNT(*) FROM pedido where id_comercial = ? AND id_cliente = ? AND fecha >= DATE_SUB(NOW(), INTERVAL ? DAY)",
                 Integer.class,
-                idComercial, numDias
+                idComercial, idCliente, numDias
 				);
 
 		log.info("El cliente tiene {} pedidos.", numPedidos);

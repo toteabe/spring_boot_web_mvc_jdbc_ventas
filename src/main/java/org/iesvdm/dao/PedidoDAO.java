@@ -9,6 +9,6 @@ public interface PedidoDAO {
 
 	public List<Pedido> getAll(int idComercial);
 	public List<PedidoDTO> getAllDTO(int idComercial);
-	public int numPedidosComercial(int id);
-	public int numPedidosComercial(int id, int numDias);
+	public int numPedidosComercial(long idCliente, int id);
+	public int numPedidosComercial(long idCliente, int id, int numDias);
 }

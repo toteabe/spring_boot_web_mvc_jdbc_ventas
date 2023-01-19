@@ -3,6 +3,7 @@ package org.iesvdm.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvdm.dto.ClienteDTO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 
@@ -18,5 +19,7 @@ public interface ClienteDAO {
 	public void delete(long id);
 	
 	public List<Comercial> listarComerciales(int d);
+	
+	public List<ClienteDTO> getAllClienteDTO(int idComercial);
 	
 }

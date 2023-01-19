@@ -2,6 +2,7 @@ package org.iesvdm.controlador;
 
 import java.util.List;
 
+import org.iesvdm.dto.ClienteDTO;
 import org.iesvdm.dto.PedidoDTO;
 import org.iesvdm.mapstruct.ComercialMapper;
 import org.iesvdm.modelo.Comercial;
@@ -41,7 +42,7 @@ public class ComercialController {
 		
 		Comercial comercial = comercialService.one(id);
 		List<PedidoDTO> listaPedidos = comercialService.oneListaPedidos(id);
-		List<PedidoDTO> listaPedidosOrdenada = comercialService.ordenarLista(listaPedidos);
+		List<ClienteDTO> listaClientes = comercialService.oneListaClientes(id);
 		double total = comercialService.pedidoTotal(listaPedidos);
 		double media = comercialService.pedidoMedia(listaPedidos);
 		double max = comercialService.pedidoTotalMax(listaPedidos);
@@ -49,7 +50,7 @@ public class ComercialController {
 		
 		model.addAttribute("comercial", comercial);
 		model.addAttribute("listaPedidos", listaPedidos);
-		model.addAttribute("listaPedidosOrdenada", listaPedidosOrdenada);
+		model.addAttribute("listaClientes", listaClientes);
 		model.addAttribute("total", total);
 		model.addAttribute("media", media);
 		model.addAttribute("max", max);

@@ -75,3 +75,4 @@ SELECT C.* FROM comercial C
 	WHERE P.id_cliente = 3
 	GROUP BY C.id;
 SELECT COUNT(*) FROM pedido WHERE id_comercial = 1 AND fecha >= DATE_SUB(NOW(), INTERVAL 1864 DAY);
+select C.nombre, C.apellido1, C.apellido2, MAX(P.total) from cliente C left join pedido P on C.id = P.id_cliente where P.id_comercial = 1	 group by C.id;

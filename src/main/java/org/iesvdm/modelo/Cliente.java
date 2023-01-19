@@ -18,7 +18,7 @@ public class Cliente {
 	public Cliente() {
 	}
 	
-	private long id;
+	private int id;
 	
 	@NotBlank(message = "Por favor, introduzca el nombre.")
 	@Size(max=30, message = "Nombre como máximo de 30 caracteres.")
