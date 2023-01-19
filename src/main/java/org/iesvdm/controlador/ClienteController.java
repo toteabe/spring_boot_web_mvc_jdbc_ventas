@@ -71,11 +71,21 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/clientes/crear")
-	public RedirectView submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResulted) {
+	public RedirectView submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResulted, Model model) {
 		
-		clienteService.newCliente(cliente);
+		String view;
+		String error = "";
+		
+		if (bindingResulted.hasErrors()) {
+			view = "/clientes/crear";
+			error = "fallo";
+		} else {
+			view = "/clientes";
+			clienteService.newCliente(cliente);
+		}
+		model.addAttribute("error", error);
 				
-		return new RedirectView("/clientes") ;
+		return new RedirectView(view) ;
 		
 	}
 	
