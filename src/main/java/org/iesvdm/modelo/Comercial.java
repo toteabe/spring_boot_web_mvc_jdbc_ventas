@@ -1,6 +1,9 @@
 package org.iesvdm.modelo;
 
 import lombok.AllArgsConstructor;
+
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -25,6 +28,8 @@ public class Comercial {
 	
 	private String apellido2;
 	
-	private float comision;
+	@DecimalMin(value="0.276", inclusive=true, message = "La comisión debe ser superior o igual a 0.276.")
+	@DecimalMax(value="0.946", inclusive=true, message = "La comisión debe ser inferior o igual a 0.946.")
+	private BigDecimal comision;
 	
 }

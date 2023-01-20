@@ -1,5 +1,6 @@
 package org.iesvdm.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.iesvdm.modelo.Pedido;
@@ -20,7 +21,7 @@ public class ComercialDTO {
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
-	private float comision;
+	private BigDecimal comision;
 	private int numPedidosTotal;
 	private int numPedidosTrimestre;
 	private int numPedidosSemestre;

@@ -20,4 +20,5 @@ public class ClienteDTO {
 	private int categoria;
 	private String fotoPerfil;
 	private double pedidoMax;
+	private String correo;
 }

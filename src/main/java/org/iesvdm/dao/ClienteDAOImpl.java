@@ -34,8 +34,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 		
 							//Desde java15+ se tiene la triple quote """ para bloques de texto como cadenas.
 		String sqlInsert = """
-							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría, fotoPerfil) 
-							VALUES  (     ?,         ?,         ?,       ?,         ?,		?)
+							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría, fotoPerfil, correo) 
+							VALUES  (     ?,         ?,         ?,       ?,         ?,		?,		?)
 						   """;
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -48,7 +48,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 			ps.setString(idx++, cliente.getApellido2());
 			ps.setString(idx++, cliente.getCiudad());
 			ps.setInt(idx++, cliente.getCategoria());
-			ps.setString(idx, null);
+			ps.setString(idx++, null);
+			ps.setString(idx, cliente.getCorreo());
 			return ps;
 		},keyHolder);
 		
@@ -80,7 +81,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 						 	rs.getString("apellido2"),
                 						 	rs.getString("ciudad"),
                 						 	rs.getInt("categoría"),
-                						 	rs.getString("fotoPerfil")
+                						 	rs.getString("fotoPerfil"),
+                						 	rs.getString("correo")
                 						 	)
         );
 		
@@ -104,7 +106,8 @@ public class ClienteDAOImpl implements ClienteDAO {
             						 						rs.getString("apellido2"),
             						 						rs.getString("ciudad"),
             						 						rs.getInt("categoría"),
-            						 						rs.getString("fotoPerfil")) 
+            						 						rs.getString("fotoPerfil"),
+            						 						rs.getString("correo")) 
 								, id
 								);
 		
@@ -131,7 +134,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 														apellido2 = ?,
 														ciudad = ?,
 														categoría = ?,
-														fotoPerfil = ? 
+														fotoPerfil = ?,
+														correo = ? 
 												WHERE id = ?
 										""", cliente.getNombre()
 										, cliente.getApellido1()
@@ -139,6 +143,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 										, cliente.getCiudad()
 										, cliente.getCategoria()
 										, cliente.getFotoPerfil()
+										, cliente.getCorreo()
 										, cliente.getId());
 		
 		log.info("Update de Cliente con {} registros actualizados.", rows);
@@ -166,7 +171,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                 						 	rs.getString("nombre"),
                 						 	rs.getString("apellido1"),
                 						 	rs.getString("apellido2"),
-                						 	rs.getFloat("comisión")
+                						 	rs.getBigDecimal("comisión")
                 						 	),
                 id
         );
@@ -188,7 +193,8 @@ public class ClienteDAOImpl implements ClienteDAO {
                 						 	rs.getString("ciudad"),
                 						 	rs.getInt("categoría"),
                 						 	rs.getString("fotoPerfil"),
-                						 	rs.getDouble("maxPedido")
+                						 	rs.getDouble("maxPedido"),
+                						 	rs.getString("correo")
                 						 	),
                 idComercial
         );

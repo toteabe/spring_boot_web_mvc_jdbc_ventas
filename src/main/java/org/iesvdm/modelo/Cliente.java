@@ -1,5 +1,6 @@
 package org.iesvdm.modelo;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -20,8 +21,8 @@ public class Cliente {
 	
 	private int id;
 	
-	@NotBlank(message = "Por favor, introduzca el nombre.")
-	@Size(max=30, message = "Nombre como máximo de 30 caracteres.")
+	@NotBlank(message = "{error.cliente.nombre.notBlank}")
+	@Size(max=30, message = "{error.cliente.nombre.size}")
 	private String nombre;
 	
 	@NotBlank(message = "Por favor, introduzca el primer apellido.")
@@ -40,5 +41,8 @@ public class Cliente {
 	private int categoria;
 	
 	private String fotoPerfil;
+	
+	@Email(message = "Formato de email incorrecto", regexp="^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
+	private String correo;
 	
 }

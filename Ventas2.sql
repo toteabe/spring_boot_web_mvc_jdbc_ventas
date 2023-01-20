@@ -9,7 +9,8 @@ CREATE TABLE cliente (
   apellido2 VARCHAR(100),
   ciudad VARCHAR(100),
   categoría INT UNSIGNED,
-  fotoPerfil VARCHAR(100)
+  fotoPerfil VARCHAR(100),
+  correo VARCHAR(100)
 );
 
 CREATE TABLE comercial (
@@ -30,16 +31,16 @@ CREATE TABLE pedido (
   FOREIGN KEY (id_comercial) REFERENCES comercial(id)
 );
 
-INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', 'Almería', 100, NULL);
-INSERT INTO cliente VALUES(2, 'Adela', 'Salas', 'Díaz', 'Granada', 200, NULL);
-INSERT INTO cliente VALUES(3, 'Adolfo', 'Rubio', 'Flores', 'Sevilla', NULL, NULL);
-INSERT INTO cliente VALUES(4, 'Adrián', 'Suárez', NULL, 'Jaén', 300, NULL);
-INSERT INTO cliente VALUES(5, 'Marcos', 'Loyola', 'Méndez', 'Almería', 200, NULL);
-INSERT INTO cliente VALUES(6, 'María', 'Santana', 'Moreno', 'Cádiz', 100, NULL);
-INSERT INTO cliente VALUES(7, 'Pilar', 'Ruiz', NULL, 'Sevilla', 300, NULL);
-INSERT INTO cliente VALUES(8, 'Pepe', 'Ruiz', 'Santana', 'Huelva', 200, NULL);
-INSERT INTO cliente VALUES(9, 'Guillermo', 'López', 'Gómez', 'Granada', 225, NULL);
-INSERT INTO cliente VALUES(10, 'Daniel', 'Santana', 'Loyola', 'Sevilla', 125, NULL);
+INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', 'Almería', 100, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(2, 'Adela', 'Salas', 'Díaz', 'Granada', 200, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(3, 'Adolfo', 'Rubio', 'Flores', 'Sevilla', 100, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(4, 'Adrián', 'Suárez', NULL, 'Jaén', 300, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(5, 'Marcos', 'Loyola', 'Méndez', 'Almería', 200, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(6, 'María', 'Santana', 'Moreno', 'Cádiz', 100, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(7, 'Pilar', 'Ruiz', NULL, 'Sevilla', 300, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(8, 'Pepe', 'Ruiz', 'Santana', 'Huelva', 200, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(9, 'Guillermo', 'López', 'Gómez', 'Granada', 225, NULL, "correo@gmail.com");
+INSERT INTO cliente VALUES(10, 'Daniel', 'Santana', 'Loyola', 'Sevilla', 125, NULL, "correo@gmail.com");
 
 INSERT INTO comercial VALUES(1, 'Daniel', 'Sáez', 'Vega', 0.15);
 INSERT INTO comercial VALUES(2, 'Juan', 'Gómez', 'López', 0.13);
@@ -68,7 +69,7 @@ INSERT INTO pedido VALUES(15, 370.85, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(16, 2389.23, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(17, 250.50, '2023-01-10', 7, 5);
 
-select * from pedido;
+select * from cliente;
 select P.* from pedido P inner join cliente C on P.id_cliente = C.id where C.id = 1;
 SELECT C.* FROM comercial C 
 	INNER JOIN pedido P ON C.id = P.id_comercial
