@@ -18,18 +18,19 @@ public class Comercial {
 	
 	private int id;
 	
-	@NotBlank(message = "Por favor, introduzca el nombre.")
-	@Size(max=30, message = "Nombre como máximo de 30 caracteres.")
+	@NotBlank(message = "{error.comercial.nombre.notBlank}")
+	@Size(max=30, message = "{error.comercial.nombre.max}")
 	private String nombre;
 	
-	@NotBlank(message = "Por favor, introduzca el primer apellido.")
-	@Size(max=30, message = "Apellido como máximo de 30 caracteres.")
+	@NotBlank(message = "{error.comercial.apellido1.notBlank}")
+	@Size(max=30, message = "{error.comercial.apellido1.max}")
 	private String apellido1;
 	
 	private String apellido2;
 	
-	@DecimalMin(value="0.276", inclusive=true, message = "La comisión debe ser superior o igual a 0.276.")
-	@DecimalMax(value="0.946", inclusive=true, message = "La comisión debe ser inferior o igual a 0.946.")
+	@NotNull(message = "{error.comercial.comision.notNull}")
+	@DecimalMin(value="0.276", inclusive=true, message = "{error.comercial.comision.min}")
+	@DecimalMax(value="0.946", inclusive=true, message = "{error.comercial.comision.max}")
 	private BigDecimal comision;
 	
 }

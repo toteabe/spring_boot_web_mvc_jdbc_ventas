@@ -37,6 +37,9 @@
 			<div th:text="#{nombre}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:field="*{nombre}" />
+				<ul th:if="${#fields.hasErrors('nombre')}">
+        			<li th:each="err : ${#fields.errors('nombre')}" th:text="${err}" class="error" />
+    			</ul>
 			</div> 
 		</div>
 
@@ -44,6 +47,9 @@
 			<div th:text="#{apellido1}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:field="*{apellido1}" />
+				<ul th:if="${#fields.hasErrors('apellido1')}">
+        			<li th:each="err : ${#fields.errors('apellido1')}" th:text="${err}" class="error" />
+    			</ul>
 			</div> 
 		</div>
 
@@ -58,6 +64,9 @@
 			<div th:text="#{comision}" style="float: left;width: 50%"></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input th:field="*{comision}" />
+				<ul th:if="${#fields.hasErrors('comision')}">
+        			<li th:each="err : ${#fields.errors('comision')}" th:text="${err}" class="error" />
+    			</ul>
 			</div> 
 		</div>
 
