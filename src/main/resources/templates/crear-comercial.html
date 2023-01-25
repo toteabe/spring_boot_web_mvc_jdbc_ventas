@@ -3,34 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Crear Comercial</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
-<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+<div class="container">
 	<form th:action="@{/comerciales/crear}" th:object="${comercial}" method="post">
-		<div class="clearfix">
-			<div style="float: left; width: 50%">
-				<h1 th:text="#{crear_comercial}"></h1>
+		<div class="row align-items-center m-0 p-0 mt-3">
+			<div class="col-md-6 m-0 p-0">
+				<h1 class="m-0 p-0" th:text="#{crear_comercial}"></h1>
 			</div>
-			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				
-				<div style="position: absolute; left: 39%; top : 39%;">								
+			<div class="col-md-6 m-0 p-0">					
 					<input type="submit" th:value="#{crear}"/>					
-				</div>
-				
 			</div>
-		</div>
-		
-		<div class="clearfix">
-			<hr/>
 		</div>
 		
 		<div style="margin-top: 6px;" class="clearfix">

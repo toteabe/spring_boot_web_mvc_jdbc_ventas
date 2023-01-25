@@ -3,12 +3,15 @@ package org.iesvdm.controlador;
 import java.util.List;
 
 import org.iesvdm.dto.ComercialDTO;
+import org.iesvdm.exception.MiExcepcion;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ClienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,7 @@ import jakarta.validation.Valid;
 //Los mappings de los métodos tendrían este valor /clientes como
 //prefijo.
 //@RequestMapping("/clientes")
+@ControllerAdvice
 public class ClienteController {
 	
 	private ClienteService clienteService;
@@ -33,6 +37,22 @@ public class ClienteController {
 	//@Autowired
 	public ClienteController(ClienteService clienteService) {
 		this.clienteService = clienteService;
+	}
+	
+	@ExceptionHandler(MiExcepcion.class)
+	public String handleMiExcepcion(Model model, MiExcepcion miExcepcion) {
+		
+		model.addAttribute("traza", miExcepcion.getMessage());
+		
+		return "error-mi-excepcion";
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String handleAllUncaughtExceeption(Model model, RuntimeException exception) {
+		
+		model.addAttribute("traza", exception.getMessage());
+		
+		return "error";
 	}
 	
 	//@RequestMapping(value = "/clientes", method = RequestMethod.GET)
