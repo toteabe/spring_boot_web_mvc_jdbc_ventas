@@ -42,7 +42,7 @@ public class ClienteService {
 	public Cliente one(Integer id) {
 		Optional<Cliente> optCli = clienteDAO.find(id);
 		if (optCli.isPresent())
-			return null;
+			return optCli.get();
 		else 
 			return null;
 	}
