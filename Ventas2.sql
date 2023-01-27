@@ -25,10 +25,10 @@ CREATE TABLE pedido (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   total DOUBLE NOT NULL,
   fecha DATE,
-  id_cliente INT UNSIGNED NOT NULL,
-  id_comercial INT UNSIGNED NOT NULL,
-  FOREIGN KEY (id_cliente) REFERENCES cliente(id),
-  FOREIGN KEY (id_comercial) REFERENCES comercial(id)
+  id_cliente INT UNSIGNED /*NOT NULL*/,
+  id_comercial INT UNSIGNED /*NOT NULL*/,
+  FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON DELETE SET NULL,
+  FOREIGN KEY (id_comercial) REFERENCES comercial(id) ON DELETE SET NULL
 );
 
 INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', 'Almería', 100, NULL, "correo@gmail.com");
@@ -69,7 +69,7 @@ INSERT INTO pedido VALUES(15, 370.85, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(16, 2389.23, '2019-03-11', 1, 5);
 INSERT INTO pedido VALUES(17, 250.50, '2023-01-10', 7, 5);
 
-select * from cliente;
+select * from pedido;
 select P.* from pedido P inner join cliente C on P.id_cliente = C.id where C.id = 1;
 SELECT C.* FROM comercial C 
 	INNER JOIN pedido P ON C.id = P.id_comercial

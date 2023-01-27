@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.iesvdm.dto.ClienteDTO;
 import org.iesvdm.dto.PedidoDTO;
+import org.iesvdm.exception.MiExcepcion;
 import org.iesvdm.mapstruct.ComercialMapper;
 import org.iesvdm.modelo.Comercial;
 import org.iesvdm.service.ComercialService;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +25,29 @@ import org.springframework.web.servlet.view.RedirectView;
 import jakarta.validation.Valid;
 
 @Controller
+@ControllerAdvice
 public class ComercialController {
 	
 	private ComercialService comercialService;
 	
 	public ComercialController(ComercialService comercialService) {
 		this.comercialService = comercialService;
+	}
+	
+	@ExceptionHandler(MiExcepcion.class)
+	public String handleMiExcepcion(Model model, MiExcepcion miExcepcion) {
+		
+		model.addAttribute("traza", miExcepcion.getMessage());
+		
+		return "error-mi-excepcion";
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String handleAllUncaughtExceeption(Model model, RuntimeException exception) {
+		
+		model.addAttribute("traza", exception.getMessage());
+		
+		return "error";
 	}
 	
 	@GetMapping("/comerciales")
