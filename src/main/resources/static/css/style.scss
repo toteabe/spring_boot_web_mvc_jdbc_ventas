@@ -10,91 +10,10 @@
     max-width: 1200px;
 }
 
-header {
-
-    background-color: $bg_header;
-    padding: 10px 0px;
-    z-index: 1;
-    position: sticky;
-    top: 0;
-
-    section {
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0 auto;
-        padding: 10px 0px;
-
-        h1 {
-
-            flex: 0 1 20%;
-
-            a:link, a:visited {
-                padding: 20px;
-                text-decoration: none;
-                color: black;
-            }
-
-            a:hover {
-                text-decoration: underline;
-                background-color: $bg_header_hover;
-            }
-            
-        }
-
-        nav {
-            flex-grow: 1;
-
-            ul {
-                display: flex;
-                flex-direction: row;
-                list-style-type: none;
-
-                a:link, a:visited {
-                    padding: 25px;
-                    text-decoration: none;
-                    color: black;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                    background-color: $bg_header_hover;
-                }
-            }
-        }
-    }
-}
-
 main {
     display: flex;
     justify-content: space-between;
     margin: 20px auto 0px auto;
-
-    .filtros {
-        position: sticky;
-        top: 50%;
-        flex: 0 1 15%;
-        background-color: aliceblue;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-
-        input {
-            
-            padding: 5px 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            border: 2px solid black;
-        }
-
-        input:hover {
-            background-color: rgb(201, 192, 192);
-        }
-    }
 
     .listado {
         flex: 0 1 83%;

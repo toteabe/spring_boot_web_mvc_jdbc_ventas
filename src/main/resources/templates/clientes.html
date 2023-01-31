@@ -16,16 +16,28 @@
 
 </style>
 <link th:href="@{/css/style.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 <script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-	<div id="contenedora" style="float:none; margin: 0 auto;width: 95%;" >
-		<div class="clearfix">
-
-			<div style="float: left; width: 50%">
-				<h1 th:text="#{clientes}"></h1>
-			</div>
+<!--
+	<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
+	<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
+-->
+	<header>
+		<div class="container-xxl px-3 px-xxl-3">
+			<div class="d-inline h1 m-0" th:text="#{administracion}"></div>
+			<a class="d-inline ms-5" th:href="@{/clientes}">
+				<div class="d-inline fs-5 m-0 text-dark" th:text="#{clientes}"></div>
+			</a>
+			<a class="d-inline ms-5" th:href="@{/comerciales}">
+				<div class="d-inline fs-5 m-0 text-dark" th:text="#{comerciales}"></div>
+			</a>
+			
+		</div>
+	</header>
+	
 
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				<div style="position: absolute; left: 39%; top : 39%;">
@@ -37,17 +49,14 @@
 
 		</div>
 
-		<div class="clearfix">
-			<hr/>
-		</div>
-
-		<div>
-			<div>
-				<form action="/comerciales">
-					<input type="submit" th:value="#{comerciales}">
-				</form>
-			</div>
-		</div>
+		<form th.action="@{/clientes/}">
+			<label>Id:</label>
+			<select name="filtros">
+				<option value="idAscendente" selected>Ascendente</option>
+				<option value="idDescendente">Descendente</option>
+			</select>
+			<input type="submit" class="btn btn-primary" value="Filtrar">
+		</form>
 
 		<div class="clearfix">
 			<hr/>
@@ -93,15 +102,15 @@
 
 <!--
 	<header>
-		<section class="contenedor">
-			<h1><a th:text="#{administracion}" th:href="@{/}"></a></h1>
-			<nav>
-				<ul>
-					<li><a th:text="@{clientes}" th:href="@{/clientes}"></a></li>
-					<li><a th:text="@{comerciales}" th:href="@{/comerciales}"></a></li>
+		<div class="container-xxl px-3 px-xxl-0 m-auto row">
+			<h1 class="m-0 p-0 col-auto text-dark"><a th:text="#{administracion}" th:href="@{/}"></a></h1>
+			<nav class="col-auto">
+				<ul class="row">
+					<a class="col-6 text-decoration-none text-dark" th:text="@{clientes}" th:href="@{/clientes}"></a>
+					<a class="col-6 text-decoration-none text-dark" th:text="@{comerciales}" th:href="@{/comerciales}"></a>
 				</ul>
 			</nav>
-		</section>
+		</div>
 	</header>
 
 	<main class="contenedor">
@@ -109,6 +118,15 @@
 			<form action="/clientes/crear">
 				<input type="submit" th:value="#{crear}">
 			</form>
+			<form action="/clientes/crear">
+				<label>ID:</label>
+				<select name=ordenarId>
+					<option value="ascendente" selected>Ascendente</option>
+					<option value="ascendente">Descendente</option>
+				</select>
+				<input type="buttom" class="btn btn-primary" value="Filtrar">
+			</form>
+			
 		</section>
 
 		<section class="listado">
@@ -148,6 +166,6 @@
 			</div>
 		</section>
 	</main>
-	-->
+-->
 </body>
 </html>

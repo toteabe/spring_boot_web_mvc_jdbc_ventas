@@ -9,69 +9,6 @@
   max-width: 1200px;
 }
 
-header {
-  background-color: rgb(91, 166, 231);
-  padding: 10px 0px;
-  z-index: 1;
-  position: sticky;
-  top: 0;
-}
-header section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0 auto;
-  padding: 10px 0px;
-}
-header section h1 {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 20%;
-          flex: 0 1 20%;
-}
-header section h1 a:link, header section h1 a:visited {
-  padding: 20px;
-  text-decoration: none;
-  color: black;
-}
-header section h1 a:hover {
-  text-decoration: underline;
-  background-color: rgb(63, 151, 228);
-}
-header section nav {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-header section nav ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  list-style-type: none;
-}
-header section nav ul a:link, header section nav ul a:visited {
-  padding: 25px;
-  text-decoration: none;
-  color: black;
-}
-header section nav ul a:hover {
-  text-decoration: underline;
-  background-color: rgb(63, 151, 228);
-}
-
 main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -80,35 +17,6 @@ main {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 20px auto 0px auto;
-}
-main .filtros {
-  position: sticky;
-  top: 50%;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 15%;
-          flex: 0 1 15%;
-  background-color: aliceblue;
-  border-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 10px;
-}
-main .filtros input {
-  padding: 5px 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  border: 2px solid black;
-}
-main .filtros input:hover {
-  background-color: rgb(201, 192, 192);
 }
 main .listado {
   -webkit-box-flex: 0;

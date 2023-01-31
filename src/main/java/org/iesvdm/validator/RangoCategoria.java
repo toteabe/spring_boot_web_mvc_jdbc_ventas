@@ -11,6 +11,8 @@ import jakarta.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RangoCategoria {
 
+	int[] valoresValidos() default {100, 200, 300, 400, 500, 600, 700, 800, 1000};
+	
 	String message() default "{error.cliente.categoria.custom}";
 	
 	//Para validación en wizards, poco uso en la actualidad.
