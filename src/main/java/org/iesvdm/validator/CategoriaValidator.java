@@ -11,7 +11,7 @@ public class CategoriaValidator implements ConstraintValidator<RangoCategoria, I
     
     @Override
     public void initialize(RangoCategoria constraintAnnotation) {
-        this.valoresValidos = constraintAnnotation.valoresValidos();
+        this.valoresValidos = constraintAnnotation.value();
     }
     
     @Override

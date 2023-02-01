@@ -26,7 +26,7 @@
 	<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
 -->
 	<header>
-		<div class="container-xxl px-3 px-xxl-3">
+		<div class="container-xxl px-3 px-xxl-0">
 			<div class="d-inline h1 m-0" th:text="#{administracion}"></div>
 			<a class="d-inline ms-5" th:href="@{/clientes}">
 				<div class="d-inline fs-5 m-0 text-dark" th:text="#{clientes}"></div>
@@ -38,134 +38,48 @@
 		</div>
 	</header>
 	
-
-			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				<div style="position: absolute; left: 39%; top : 39%;">
-					<form action="/clientes/crear">
-						<input type="submit" th:value="#{crear}">
-					</form>
-				</div>
-			</div>
-
-		</div>
-
-		<form th.action="@{/clientes/}">
-			<label>Id:</label>
-			<select name="filtros">
-				<option value="idAscendente" selected>Ascendente</option>
-				<option value="idDescendente">Descendente</option>
-			</select>
-			<input type="submit" class="btn btn-primary" value="Filtrar">
+	<nav class="container-xxl px-3 px-xxl-0 border-bottom border-bottom-dark my-3 pb-3">
+		<form action="/clientes/crear">
+			<input class="btn btn-primary" type="submit" th:value="#{crear}">
 		</form>
+	</nav>
 
-		<div class="clearfix">
-			<hr/>
-		</div>
-
-		<div class="clearfix">
-		<div style="float: left;width: 5%">Id</div>
-			<div th:text="#{imagen}" style="float: left;width: 5%"></div>
-			<div th:text="#{nombre}" style="float: left;width: 14%"></div>
-			<div th:text="#{apellido1}" style="float: left;width: 14%"></div>
-			<div th:text="#{apellido2}" style="float: left;width: 14%"></div>
-			<div th:text="#{ciudad}" style="float: left;width: 14%"></div>
-			<div th:text="#{categoria}" style="float: left;width: 14%"></div>
-			<div th:text="#{correo}" style="float: left;width: 14%"></div>
-			<div th:text="#{accion}" style="float: none;width: auto;overflow: hidden;"></div>
-		</div>
-		<div class="clearfix">
-			<hr/>
-		</div>
-
-		<div  th:each="cliente : ${listaClientes}" style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 5%" th:text="${cliente.id}">0</div>
-			<div style="float: left;width: 5%"><i class="fa-regular fa-circle-user" style="font-size: 30px;"></i></div>
-			<div style="float: left;width: 14%" id="nombre" th:text="${cliente.nombre}">nombre</div>
-			<div style="float: left;width: 14%" id="apellido1" th:text="${cliente.apellido1}">apellido1</div>
-			<div style="float: left;width: 14%" id="apellido2" th:text="${cliente.apellido2 ?: '&nbsp;'}">apellido2</div>
-			<div style="float: left;width: 14%" id="ciudad" th:text="${cliente.ciudad}">ciudad</div>
-			<div style="float: left;width: 14%" id="categoria" th:text="${cliente.categoria}">categoría</div>
-			<div style="float: left;width: 14%" id="correo" th:text="${cliente.correo}">correo</div>
-			<div style="float: none;width: auto;overflow: hidden;">
-				<form th:action="@{/clientes/__${cliente.id}__}" style="display: inline;">
-    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-				</form>
-				<form th:action="@{/clientes/editar/}+${cliente.id} " style="display: inline;">
-    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
-				</form>
-				<form th:action="@{/clientes/borrar/}+${cliente.id}" method="post" style="display: inline;">					
-    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-<!--
-	<header>
-		<div class="container-xxl px-3 px-xxl-0 m-auto row">
-			<h1 class="m-0 p-0 col-auto text-dark"><a th:text="#{administracion}" th:href="@{/}"></a></h1>
-			<nav class="col-auto">
-				<ul class="row">
-					<a class="col-6 text-decoration-none text-dark" th:text="@{clientes}" th:href="@{/clientes}"></a>
-					<a class="col-6 text-decoration-none text-dark" th:text="@{comerciales}" th:href="@{/comerciales}"></a>
-				</ul>
-			</nav>
-		</div>
-	</header>
-
-	<main class="contenedor">
-		<section class="filtros">
-			<form action="/clientes/crear">
-				<input type="submit" th:value="#{crear}">
-			</form>
-			<form action="/clientes/crear">
-				<label>ID:</label>
-				<select name=ordenarId>
-					<option value="ascendente" selected>Ascendente</option>
-					<option value="ascendente">Descendente</option>
-				</select>
-				<input type="buttom" class="btn btn-primary" value="Filtrar">
-			</form>
+	<main class="container-xxl px-3 px-xxl-0 row m-auto">
+			<ul class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(9, 1fr);">
+				<li th:text="#{id}"></li>
+				<li th:text="#{imagen}"></li>
+				<li th:text="#{nombre}"></li>
+				<li th:text="#{apellido1}"></li>
+				<li th:text="#{apellido2}"></li>
+				<li th:text="#{ciudad}"></li>
+				<li th:text="#{categoria}"></li>
+				<li th:text="#{correo}"></li>
+				<li th:text="#{accion}"></li>
+			</ul>
 			
-		</section>
-
-		<section class="listado">
-			<div class="informacion" th:classappend="${cliente.id % 2 != 0} ? gris : ''" th:each="cliente : ${listaClientes}">
-				<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
-				<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
-				<div class="datos">
-					<h3 class="zonaSuperior" th:text="${cliente.id} + '. ' + ${cliente.nombre} + ' ' + ${cliente.apellido1} + ' ' + ${cliente.apellido2 ?: '&nbsp;'}"></h3>
-					<div class="zonaInferior">
-						<div class="zonaIzquierda">
-							<div class="localizacion">
-							<i class="fa-solid fa-location-dot"></i>
-							<p th:text="${cliente.ciudad}"></p>
-						</div>
-						<div class="categoria">
-
-							<p th:text="#{categoria} + ': ' + ${cliente.categoria}"></p>
-						</div>
-						<div>
-							<p th:text="${cliente.correo}"></p>
-						</div>
-					</div>
-						
-					<div class="zonaDerecha">
+			<section>
+				<div th:each="cliente : ${listaClientes}" class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(9, 1fr);">
+					<div th:text="${cliente.id}">0</div>
+					<div><i class="fa-regular fa-circle-user" style="font-size: 30px;"></i></div>
+					<div id="nombre" th:text="${cliente.nombre}">nombre</div>
+					<div id="apellido1" th:text="${cliente.apellido1}">apellido1</div>
+					<div id="apellido2" th:text="${cliente.apellido2 ?: '&nbsp;'}">apellido2</div>
+					<div id="ciudad" th:text="${cliente.ciudad}">ciudad</div>
+					<div id="categoria" th:text="${cliente.categoria}">categoría</div>
+					<div id="correo" th:text="${cliente.correo}">correo</div>
+					<div style="float: none;width: auto;overflow: hidden;">
 						<form th:action="@{/clientes/__${cliente.id}__}" style="display: inline;">
-							<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+		    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 						</form>
 						<form th:action="@{/clientes/editar/}+${cliente.id} " style="display: inline;">
-							<button type="submit"><i class="fa-solid fa-gear"></i></button>
+		    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
 						</form>
 						<form th:action="@{/clientes/borrar/}+${cliente.id}" method="post" style="display: inline;">					
-							<button type="submit"><i class="fa-solid fa-xmark"></i></button>
+		    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
 						</form>
 					</div>
-					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 	</main>
--->
 </body>
 </html>

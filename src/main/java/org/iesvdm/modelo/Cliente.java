@@ -37,7 +37,7 @@ public class Cliente {
 	@Size(max=50, message = "{error.cliente.ciudad.max}")
 	private String ciudad;
 	
-	@RangoCategoria
+	@RangoCategoria(value= {100, 200, 300, 400, 500, 600, 700, 800, 900, 1000}, message = "ERROR: valores válidos son: {value}")
 	@NotNull(message = "{error.cliente.categoria.notNull}")
 	@Min(value=100, message = "{error.cliente.categoria.min}")
 	@Max(value=1000, message = "{error.cliente.categoria.max}")
