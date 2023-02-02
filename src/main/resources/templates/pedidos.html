@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Clientes</title>
+<title>Pedidos</title>
 <style>
 .clearfix::after {
 	content: "";
@@ -21,10 +21,7 @@
 <script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<!--
-	<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
-	<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
--->
+
 	<header>
 		<div class="container-xxl px-3 px-xxl-0">
 			<div class="d-inline h1 m-0" th:text="#{administracion}"></div>
@@ -42,42 +39,36 @@
 	</header>
 	
 	<nav class="container-xxl px-3 px-xxl-0 border-bottom border-bottom-dark my-3 pb-3">
-		<form action="/clientes/crear">
+		<form action="/pedidos/crear">
 			<input class="btn btn-primary" type="submit" th:value="#{crear}">
 		</form>
 	</nav>
 
 	<main class="container-xxl px-3 px-xxl-0 row m-auto">
-			<ul class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(9, 1fr);">
+			<ul class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(6, 1fr);">
 				<li th:text="#{id}"></li>
-				<li th:text="#{imagen}"></li>
-				<li th:text="#{nombre}"></li>
-				<li th:text="#{apellido1}"></li>
-				<li th:text="#{apellido2}"></li>
-				<li th:text="#{ciudad}"></li>
-				<li th:text="#{categoria}"></li>
-				<li th:text="#{correo}"></li>
+				<li th:text="Total"></li>
+				<li th:text="Fecha"></li>
+				<li th:text="Id_cliente"></li>
+				<li th:text="Id_comercial"></li>
 				<li th:text="#{accion}"></li>
 			</ul>
 			
 			<section>
-				<div th:each="cliente : ${listaClientes}" class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(9, 1fr);">
-					<div th:text="${cliente.id}">0</div>
-					<div><i class="fa-regular fa-circle-user" style="font-size: 30px;"></i></div>
-					<div id="nombre" th:text="${cliente.nombre}">nombre</div>
-					<div id="apellido1" th:text="${cliente.apellido1}">apellido1</div>
-					<div id="apellido2" th:text="${cliente.apellido2 ?: '&nbsp;'}">apellido2</div>
-					<div id="ciudad" th:text="${cliente.ciudad}">ciudad</div>
-					<div id="categoria" th:text="${cliente.categoria}">categoría</div>
-					<div id="correo" th:text="${cliente.correo}">correo</div>
+				<div th:each="pedido : ${listaPedidos}" class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(6, 1fr);">
+					<div th:text="${pedido.id}">0</div>
+					<div id="total" th:text="${pedido.total}">nombre</div>
+					<div id="fecha" th:text="${pedido.fecha}">apellido1</div>
+					<div id="id_cliente" th:text="${pedido.id_cliente ?: '&nbsp;'}">apellido2</div>
+					<div id="id_comercial" th:text="${pedido.id_comercial}">ciudad</div>
 					<div style="float: none;width: auto;overflow: hidden;">
-						<form th:action="@{/clientes/__${cliente.id}__}" style="display: inline;">
+						<form th:action="@{/pedidos/__${pedido.id}__}" style="display: inline;">
 		    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 						</form>
-						<form th:action="@{/clientes/editar/}+${cliente.id} " style="display: inline;">
+						<form th:action="@{/pedidos/editar/}+${pedido.id} " style="display: inline;">
 		    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
 						</form>
-						<form th:action="@{/clientes/borrar/}+${cliente.id}" method="post" style="display: inline;">					
+						<form th:action="@{/pedidos/borrar/}+${pedido.id}" method="post" style="display: inline;">					
 		    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
 						</form>
 					</div>
