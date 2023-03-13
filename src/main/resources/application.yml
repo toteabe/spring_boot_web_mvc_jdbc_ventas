@@ -10,5 +10,5 @@ spring:
       connection-timeout: 60000
       maximum-pool-size: 5
     password: usuario
-    url: jdbc:mysql://localhost:3306/ventas
+    url: jdbc:mysql://localhost:3306/videoclub_examen
     username: usuario

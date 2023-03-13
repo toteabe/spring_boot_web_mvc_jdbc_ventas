@@ -1,0 +1,89 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Clientes</title>
+<style>
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.gris {
+	background-color: aliceblue;
+}
+
+</style>
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!--
+	<img class="fotoPerfil" th:if="${cliente.fotoPerfil == null}" th:src="@{images/fotoPerfil/fotoNulo.png}">
+	<img class="fotoPerfil" th:if="${cliente.fotoPerfil != null}" th:src="@{images/fotoPerfil/}+${cliente.fotoPerfil}">
+-->
+	<header>
+		<div class="container-xxl px-3 px-xxl-0">
+			<div class="d-inline h1 m-0" th:text="#{administracion}"></div>		
+		</div>
+	</header>
+	
+	<nav class="container-xxl px-3 px-xxl-0 border-bottom border-bottom-dark my-3 pb-3">
+		<form action="/peliculas/crear">
+			<input class="btn btn-primary" type="submit" th:value="#{crear}">
+		</form>
+		<form action="/categorias/1">
+			<input class="btn btn-primary" type="submit" th:value="Categoria">
+		</form>
+	</nav>
+
+	<main class="container-xxl px-3 px-xxl-0 row m-auto">
+			<ul class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(13, 1fr);">
+				<li class="col-1" th:text="#{id_pelicula}"></li>
+				<li class="col-1" th:text="#{titulo}"></li>
+				<li class="col-1" th:text="#{descripcion}"></li>
+				<li class="col-1" th:text="#{anyo_lanzamiento}"></li>
+				<li class="col-1" th:text="#{id_idioma}"></li>
+				<li class="col-1" th:text="#{id_idioma_original}"></li>
+				<li class="col-1" th:text="#{duracion_alquiler}"></li>
+				<li class="col-1" th:text="#{rental_rate}"></li>
+				<li class="col-1" th:text="#{duracion}"></li>
+				<li class="col-1" th:text="#{replacement_cost}"></li>
+				<li class="col-1" th:text="#{clasificacion}"></li>
+				<li class="col-1" th:text="#{caracteristicas_especiales}"></li>
+				<li class="col-12"th:text="#{accion}"></li>
+			</ul>
+			
+			<section>
+				<div th:each="pelicula : ${listaPeliculas}" class="list-unstyled col-12 text-center" style="display: grid; grid-template-columns: repeat(13, 1fr);">
+					<div th:text="${pelicula.id_pelicula}">0</div>
+					<div th:text="${pelicula.titulo}">0</div>
+					<div th:text="${pelicula.descripcion}">0</div>
+					<div th:text="${pelicula.anyo_lanzamiento}">0</div>
+					<div th:text="${pelicula.id_idioma}">0</div>
+					<div th:text="${pelicula.id_idioma_original ?: '&nbsp;'}">0</div>
+					<div th:text="${pelicula.duracion_alquiler}">0</div>
+					<div th:text="${pelicula.rental_rate}">0</div>
+					<div th:text="${pelicula.duracion}">0</div>
+					<div th:text="${pelicula.replacement_cost}">0</div>
+					<div th:text="${pelicula.clasificacion}">0</div>
+					<div th:text="${pelicula.caracteristicas_especiales}">0</div>
+					<div style="float: none;width: auto;overflow: hidden;">
+						<form th:action="@{/peliculas/__${pelicula.id_pelicula}__}" style="display: inline;">
+		    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+						</form>
+						<form th:action="@{/peliculas/editar/}+${pelicula.id_pelicula} " style="display: inline;">
+		    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
+						</form>
+						<form th:action="@{/peliculas/borrar/}+${pelicula.id_pelicula}" method="post" style="display: inline;">					
+		    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
+						</form>
+					</div>
+				</div>
+			</section>
+	</main>
+</body>
+</html>
