@@ -1,0 +1,88 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Comerciales</title>
+<style>
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+</style>
+<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<body>
+
+	<div id="contenedora" style="float:none; margin: 0 auto;width: 95%;" >
+		<div class="clearfix">
+			<div style="float: left; width: 50%">
+				<h1 th:text="#{comerciales}"></h1>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
+				
+				<div style="position: absolute; left: 39%; top : 39%;">
+					
+						<form action="comerciales/crear">
+							<input type="submit" th:value="#{crear}">
+						</form>
+					</div>
+				
+			</div>
+		</div>
+
+		<div class="clearfix">
+			<hr/>
+		</div>
+
+		<div>
+			<div>
+					<form action="/clientes">
+						<input type="submit" th:value="#{clientes}">
+					</form>
+			</div>
+		</div>
+
+		<div class="clearfix">
+			<hr/>
+		</div>
+		<div class="clearfix">
+			<div th:text="#{id}" style="float: left;width: 14%"></div>
+			<div th:text="#{nombre}" style="float: left;width: 14%"></div>
+			<div th:text="#{apellido1}" style="float: left;width: 14%"></div>
+			<div th:text="#{apellido2}" style="float: left;width: 14%"></div>
+			<div th:text="#{comision}" style="float: left;width: 14%"></div>
+			<div th:text="#{accion}" style="float: none;width: auto;overflow: hidden;"></div>
+		</div>
+		<div class="clearfix">
+			<hr/>
+		</div>
+
+		<div  th:each="comercial : ${listaComerciales}" style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 14%" th:text="${comercial.id}">0</div>
+			<div style="float: left;width: 14%" th:text="${comercial.nombre}">nombre</div>
+			<div style="float: left;width: 14%" th:text="${comercial.apellido1}">apellido1</div>
+			<div style="float: left;width: 14%" th:text="${comercial.apellido2 ?: '&nbsp;'}">apellido2</div>
+			<div style="float: left;width: 14%" th:text="${comercial.comision}">comision</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<form th:action="@{/comerciales/}+${comercial.id}" style="display: inline;">
+    				<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+				</form>
+				<form th:action="@{/comerciales/editar/}+${comercial.id} " style="display: inline;">
+    				<button type="submit"><i class="fa-solid fa-gear"></i></button>
+				</form>
+				<form th:action="@{/comerciales/borrar/}+${comercial.id}" method="post" style="display: inline;">					
+    				<button type="submit"><i class="fa-solid fa-xmark"></i></button>
+    			</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="contenedora2">
+		
+	</div>
+</body>
+</body>
+</html>

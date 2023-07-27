@@ -1,0 +1,91 @@
+@import 'variables.scss';
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    max-width: 1200px;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 0px auto;
+
+    .listado {
+        flex: 0 1 83%;
+        display: flex;
+        flex-direction: column;
+        
+
+        .informacion {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            border-radius: 20px;
+
+            .fotoPerfil {
+                width: 50px;
+                border-radius: 10px;
+            }
+
+            .datos {
+                flex-grow: 1;
+                margin-left: 10px;
+                display: flex;
+                flex-direction: column;
+
+                .zonaSuperior {
+                    flex-grow: 0;
+                }
+
+                .zonaInferior {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .zonaIzquierda {
+
+                        display: flex;
+                        flex-direction: row;
+
+                        .localizacion, .categoria {
+                            display: flex;
+                            flex-direction: row;
+                            padding-right: 50px;
+
+                            i {
+                                color: rgb(235, 77, 77);
+                            }
+
+                            p {
+                                padding-left: 10px;
+                            }
+                        }
+                    }     
+
+                    .zonaDerecha {
+                        flex: 0 1 12%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        button {
+                            padding: 5px;
+
+                            i {
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
